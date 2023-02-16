@@ -1,0 +1,40 @@
+import { Image, StyleSheet, Text, View } from "react-native";
+import theme from "../../utils/theme";
+
+const TopInformation = ({ name, intro, style }) => {
+  return (
+    <View style={[styles.container, { ...style }]}>
+      <Image
+        style={styles.profile}
+        source={require("@assets/icons/defaultProfile.png")}
+      />
+      <Text style={[styles.text, styles.name]}>{name}</Text>
+      <Text style={[styles.text, styles.intro]}>{intro}</Text>
+    </View>
+  );
+};
+
+export default TopInformation;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  profile: {
+    width: 16,
+    height: 16,
+    marginRight: 10,
+  },
+  text: {
+    fontSize: 16,
+  },
+  name: {
+    fontFamily: "spoqaB",
+    color: `${theme.colors.deepPurple}`,
+  },
+  intro: {
+    fontFamily: "spoqaR",
+  },
+});
