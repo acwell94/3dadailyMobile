@@ -13,10 +13,12 @@ import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
-import { useCallback, useMemo, useRef } from "react";
-import HeaderBackBtn from "../../components/items/headerBackBtn";
+import { useCallback, useMemo, useRef, useState } from "react";
+import HeaderBackBtn from "../../components/items/HeaderBackBtn";
+import AskModal from "../../components/modal/AskModal";
 const { width } = Dimensions.get("window");
 const DetailScreen = () => {
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const editBottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => ["18%"], []);
   const editModalHandler = useCallback(() => {
@@ -37,8 +39,23 @@ const DetailScreen = () => {
     ),
     []
   );
+
+  const onPressDelete = () => {
+    editBottomSheetRef.current?.dismiss();
+    setDeleteModalVisible((prev) => !prev);
+  };
+
+  const deleteModalHandler = () => {
+    setDeleteModalVisible((prev) => !prev);
+  };
   return (
     <BottomSheetModalProvider>
+      <AskModal
+        isVisible={deleteModalVisible}
+        deleteHandler={deleteModalHandler}
+        firstText="일기를"
+        secondText="삭제하시겠습니까?"
+      />
       <BottomSheetModal
         ref={editBottomSheetRef}
         index={0}
@@ -54,7 +71,7 @@ const DetailScreen = () => {
             />
             <Text style={styles.editBottomTabText}>수정하기</Text>
           </Pressable>
-          <Pressable style={styles.editBottomTabBox}>
+          <Pressable style={styles.editBottomTabBox} onPress={onPressDelete}>
             <Image
               style={styles.editBottomTabIcon}
               source={require("@assets/icons/trash.png")}

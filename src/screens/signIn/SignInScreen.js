@@ -9,9 +9,9 @@ import {
   Text,
   View,
 } from "react-native";
-import UserFlowBtn from "../../components/buttons/userFlowBtn";
+import UserFlowBtn from "../../components/buttons/UserFlowBtn";
 import useNav from "../../components/hooks/useNav";
-import UserFlowInput from "../../components/inputs/userFlowInput";
+import UserFlowInput from "../../components/inputs/UserFlowInput";
 import theme from "../../utils/theme";
 
 const SignInScreen = () => {

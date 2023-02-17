@@ -2,7 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Image, SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 // import RoundBtn from "@components/buttons/roundBtn";
 import theme from "@utils/theme";
-import RoundBtn from "../../components/buttons/roundBtn";
+import RoundBtn from "../../components/buttons/RoundBtn";
 import useNav from "../../components/hooks/useNav";
 
 const MainScreen = () => {

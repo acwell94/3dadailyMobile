@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Feeling, Weather, WithWhom } from "../../utils/contents";
 import theme from "../../utils/theme";
+import FilterImage from "./FilterImage";
 
 const FilterBox = ({ name }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,9 +51,7 @@ const FilterBox = ({ name }) => {
               showsVerticalScrollIndicator={false}
             >
               {Feeling.map((el) => (
-                <View key={el.id} style={styles.conditionImageBox}>
-                  <Image style={{ width: 30, height: 30 }} source={el.img} />
-                </View>
+                <FilterImage key={el.id} data={el} />
               ))}
             </ScrollView>
           </View>
@@ -65,9 +64,7 @@ const FilterBox = ({ name }) => {
               showsVerticalScrollIndicator={false}
             >
               {Weather.map((el) => (
-                <View key={el.id} style={styles.conditionImageBox}>
-                  <Image style={{ width: 30, height: 30 }} source={el.img} />
-                </View>
+                <FilterImage key={el.id} data={el} />
               ))}
             </ScrollView>
           </View>
@@ -80,9 +77,7 @@ const FilterBox = ({ name }) => {
               showsVerticalScrollIndicator={false}
             >
               {WithWhom.map((el) => (
-                <View key={el.id} style={styles.conditionImageBox}>
-                  <Image style={{ width: 30, height: 30 }} source={el.img} />
-                </View>
+                <FilterImage key={el.id} data={el} />
               ))}
             </ScrollView>
           </View>
@@ -98,6 +93,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 8,
     elevation: 8,
+    shadowColor: "#6164BB",
     backgroundColor: "white",
     paddingVertical: 12,
     paddingHorizontal: 30,

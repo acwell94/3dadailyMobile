@@ -8,12 +8,11 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import MainScreen from "./src/screens/main/MainScreen";
 import SignInScreen from "./src/screens/signIn/SignInScreen";
-import CustomHeader from "./src/components/items/customHeader";
+import CustomHeader from "./src/components/items/CustomHeader";
 import SignUpScreen from "./src/screens/signUp/SignUpScreen";
 import FindIdScreen from "./src/screens/findId/FindIdScreen";
 import HomeScreen from "./src/screens/home/HomeScreen";
 import DetailScreen from "./src/screens/detail/DetailScreen";
-import HeaderBackBtn from "./src/components/items/headerBackBtn";
 
 const Stack = createNativeStackNavigator();
 

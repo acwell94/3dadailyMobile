@@ -25,7 +25,7 @@ export default Story;
 const styles = StyleSheet.create({
   container: {
     borderRadius: 8,
-    elevation: 3,
+    elevation: 4,
     backgroundColor: "white",
     width: "98%",
     height: 333,

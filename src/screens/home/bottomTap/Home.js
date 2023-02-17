@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
-import FilterBox from "../../../components/items/filterBox";
-import Story from "../../../components/items/story";
-import TopInformation from "../../../components/items/topInfomation";
+import FilterBox from "../../../components/items/FilterBox";
+import Story from "../../../components/items/Story";
+import TopInformation from "../../../components/items/TopInformation";
 
 const DUMMY = [
   { id: 0 },
