@@ -1,15 +1,16 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import theme from "../../utils/theme";
 
-const SettingProfileBox = () => {
+const SettingProfileBox = ({ onPress }) => {
   return (
-    <View
+    <Pressable
       style={{
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         marginBottom: 32,
       }}
+      onPress={onPress}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Image
@@ -25,7 +26,7 @@ const SettingProfileBox = () => {
         style={styles.arrowImg}
         source={require("@assets/icons/downArrow.png")}
       />
-    </View>
+    </Pressable>
   );
 };
 

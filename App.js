@@ -13,6 +13,7 @@ import SignUpScreen from "./src/screens/signUp/SignUpScreen";
 import FindIdScreen from "./src/screens/findId/FindIdScreen";
 import HomeScreen from "./src/screens/home/HomeScreen";
 import DetailScreen from "./src/screens/detail/DetailScreen";
+import ProfileScreen from "./src/screens/setting/ProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -106,6 +107,18 @@ export default function App() {
               <Stack.Screen
                 name="Detail"
                 component={DetailScreen}
+                options={{
+                  title: "",
+                  contentStyle: {
+                    paddingTop: 15,
+                    backgroundColor: "white",
+                  },
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="SettingProfile"
+                component={ProfileScreen}
                 options={{
                   title: "",
                   contentStyle: {
