@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import theme from "../../utils/theme";
 
-const HeaderBackBtn = ({ title, rightText }) => {
+const HeaderBackBtn = ({ title, rightText, rightBtnHandler }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.header}>
@@ -14,7 +14,7 @@ const HeaderBackBtn = ({ title, rightText }) => {
       </Pressable>
       {title && <Text style={styles.title}>{title}</Text>}
       {rightText ? (
-        <Pressable style={styles.rightBtn}>
+        <Pressable style={styles.rightBtn} onPress={rightBtnHandler}>
           <Text style={styles.rightText}>{rightText}</Text>
         </Pressable>
       ) : (
