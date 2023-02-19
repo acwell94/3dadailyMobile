@@ -1,14 +1,15 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
-const SettingBox = ({ title, style }) => {
+const SettingBox = ({ title, style, onPress }) => {
   return (
-    <View
+    <Pressable
       style={{
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         marginBottom: 32,
       }}
+      onPress={onPress}
     >
       <Text style={[styles.title, { ...style }]}>{title}</Text>
 
@@ -16,7 +17,7 @@ const SettingBox = ({ title, style }) => {
         style={styles.arrowImg}
         source={require("@assets/icons/downArrow.png")}
       />
-    </View>
+    </Pressable>
   );
 };
 

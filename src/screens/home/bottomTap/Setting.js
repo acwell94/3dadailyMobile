@@ -12,7 +12,10 @@ const Setting = () => {
       <SettingProfileBox
         onPress={() => navigation.navigate("SettingProfile")}
       />
-      <SettingBox title="친구관리" />
+      <SettingBox
+        title="친구관리"
+        onPress={() => navigation.navigate("FriendList")}
+      />
       <SettingBox title="비밀번호 재설정" />
       <SettingBox title="로그아웃" />
       <SettingBox title="회원탈퇴" style={{ color: `${theme.colors.red}` }} />

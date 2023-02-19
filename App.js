@@ -15,6 +15,7 @@ import HomeScreen from "./src/screens/home/HomeScreen";
 import DetailScreen from "./src/screens/detail/DetailScreen";
 import ProfileScreen from "./src/screens/setting/ProfileScreen";
 import EditProfileScreen from "./src/screens/setting/EditProfileScreen";
+import FriendListScreen from "./src/screens/setting/FriendListScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -132,6 +133,18 @@ export default function App() {
               <Stack.Screen
                 name="SettingEditProfile"
                 component={EditProfileScreen}
+                options={{
+                  title: "",
+                  contentStyle: {
+                    paddingTop: 15,
+                    backgroundColor: "white",
+                  },
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="FriendList"
+                component={FriendListScreen}
                 options={{
                   title: "",
                   contentStyle: {
