@@ -45,16 +45,17 @@ const DetailScreen = () => {
     setDeleteModalVisible((prev) => !prev);
   };
 
-  const deleteModalHandler = () => {
+  const deleteContentsModalHandler = () => {
     setDeleteModalVisible((prev) => !prev);
   };
   return (
     <BottomSheetModalProvider>
       <AskModal
         isVisible={deleteModalVisible}
-        deleteHandler={deleteModalHandler}
+        closeModalHandler={deleteContentsModalHandler}
         firstText="일기를"
         secondText="삭제하시겠습니까?"
+        optionTitle="삭제"
       />
       <BottomSheetModal
         ref={editBottomSheetRef}

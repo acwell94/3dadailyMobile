@@ -1,23 +1,33 @@
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import theme from "../../utils/theme";
 
-const AskModal = ({ isVisible, deleteHandler, firstText, secondText }) => {
+const AskModal = ({
+  isVisible,
+  closeModalHandler,
+  firstText,
+  secondText,
+  warningText,
+  optionTitle,
+}) => {
   return (
     <Modal visible={isVisible} animationType="fade" transparent={true}>
-      <Pressable style={styles.container} onPress={deleteHandler}>
+      <Pressable style={styles.container} onPress={closeModalHandler}>
         <View style={styles.modalBox}>
           <View style={styles.modalTextBox}>
             <Text style={styles.modalText}>{firstText}</Text>
             <Text style={styles.modalText}>{secondText}</Text>
+            {warningText && (
+              <Text style={styles.warningText}>{warningText}</Text>
+            )}
           </View>
           <Pressable style={styles.modalButtonBox}>
             <Text
               style={[styles.modalButtonText, { color: `${theme.colors.red}` }]}
             >
-              삭제
+              {optionTitle}
             </Text>
           </Pressable>
-          <Pressable style={styles.modalButtonBox} onPress={deleteHandler}>
+          <Pressable style={styles.modalButtonBox} onPress={closeModalHandler}>
             <Text
               style={[
                 styles.modalButtonText,
@@ -61,7 +71,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: `${theme.colors.blackGray}`,
   },
-
+  warningText: {
+    fontFamily: "spoqaM",
+    fontSize: 14,
+    color: `${theme.colors.inputBorder}`,
+  },
   modalButtonBox: {
     width: "100%",
     paddingVertical: 16,
