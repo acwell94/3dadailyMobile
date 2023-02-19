@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import FullWidthButton from "../../components/buttons/FullWidthButton";
-import EditProfileBox from "../../components/items/EditProfileBox";
+import EditInputBox from "../../components/items/EditInputBox";
 import EditProfileImage from "../../components/items/EditProfileImage";
 import HeaderBackBtn from "../../components/items/HeaderBackBtn";
 
@@ -10,9 +10,8 @@ const EditProfileScreen = () => {
       <HeaderBackBtn title="프로필 수정" />
       <EditProfileImage />
       <View style={{ paddingHorizontal: 24 }}>
-        <EditProfileBox title="닉네임" defaultData=" 김민영" />
+        <EditInputBox title="닉네임" defaultData=" 김민영" />
       </View>
-
       <FullWidthButton buttonTitle="수정하기" />
     </View>
   );

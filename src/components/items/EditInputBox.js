@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import theme from "../../utils/theme";
 
-const EditProfileBox = ({ title, defaultData }) => {
+const EditInputBox = ({ title, defaultData, style }) => {
   return (
-    <Pressable onPress={Keyboard.dismiss}>
+    <Pressable style={{ ...style }} onPress={Keyboard.dismiss}>
       <Text style={styles.title}>{title}</Text>
       <TextInput
         style={styles.input}
@@ -21,7 +21,7 @@ const EditProfileBox = ({ title, defaultData }) => {
   );
 };
 
-export default EditProfileBox;
+export default EditInputBox;
 
 const styles = StyleSheet.create({
   title: {
