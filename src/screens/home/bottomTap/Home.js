@@ -27,7 +27,7 @@ const Home = () => {
     >
       <TopInformation
         name="민영"
-        intro=", 님 오늘 하루는 어땠나요?"
+        intro="님, 오늘 하루는 어땠나요?"
         style={{ marginBottom: 16 }}
       />
       <FilterBox name="민영입니당해" />
