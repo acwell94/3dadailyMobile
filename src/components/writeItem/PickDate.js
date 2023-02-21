@@ -6,6 +6,7 @@ import useDisplayDate from "../hooks/useDisplayDate";
 import SelectBtn from "../buttons/SelectBtn";
 import MoveBtn from "../buttons/MoveBtn";
 const { width } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 const PickDate = ({
   date,
   handleDateChange,
@@ -46,8 +47,8 @@ export default PickDate;
 const styles = StyleSheet.create({
   container: {
     width: width,
+    height: height - 280,
     alignItems: "center",
-    paddingBottom: 56,
     paddingHorizontal: 24,
   },
   selectedDateBox: {

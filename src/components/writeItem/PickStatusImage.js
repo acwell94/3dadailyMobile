@@ -12,6 +12,7 @@ import MoveBtn from "../buttons/MoveBtn";
 import TopInformation from "../items/TopInformation";
 import WritePageBorder from "./WritePageBorder";
 const { width } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 const PickStatusImage = ({
   name,
   intro,
@@ -29,6 +30,7 @@ const PickStatusImage = ({
             width: "100%",
             height: "80%",
             paddingTop: 36,
+            paddingHorizontal: 12,
           }}
         >
           <ScrollView
@@ -66,8 +68,8 @@ export default memo(PickStatusImage);
 const styles = StyleSheet.create({
   container: {
     width: width,
+    height: height - 280,
     alignItems: "center",
-    paddingBottom: 56,
     paddingHorizontal: 24,
   },
   buttonBox: {
@@ -92,8 +94,8 @@ const styles = StyleSheet.create({
     width: "33.3%",
   },
   statusImg: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     marginBottom: 16,
   },
   statusImgText: {

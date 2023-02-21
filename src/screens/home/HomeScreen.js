@@ -12,6 +12,7 @@ const HomeScreen = () => {
     <BottomTab.Navigator
       initialRouteName="홈"
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: `${theme.colors.darkPurple}`,
         tabBarLabelStyle: {
           fontWeight: "700",

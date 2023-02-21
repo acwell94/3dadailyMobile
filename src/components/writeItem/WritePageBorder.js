@@ -16,5 +16,6 @@ const styles = StyleSheet.create({
     shadowColor: "#6164BB",
     backgroundColor: "white",
     borderRadius: 10,
+    position: "relative",
   },
 });

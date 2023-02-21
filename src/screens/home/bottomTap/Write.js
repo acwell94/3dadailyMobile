@@ -1,8 +1,16 @@
 import { useRef, useState } from "react";
-import { Dimensions, ScrollView, Text, View } from "react-native";
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import PickDate from "../../../components/writeItem/PickDate";
 import PickStatusImage from "../../../components/writeItem/PickStatusImage";
 import { Weather } from "../../../utils/contents";
+
+import PickAddress from "../../../components/writeItem/PickAddress";
 const { width } = Dimensions.get("window");
 const Write = () => {
   const writeScrollRef = useRef(null);
@@ -57,32 +65,33 @@ const Write = () => {
             prevBtnHandler={() => moveBtnHandler(0)}
             nextBtnHandler={() => moveBtnHandler(2)}
           />
-          {/* <PickStatusImage
-            title="3번"
+          {/* <KeyboardAvoidingView style={{ flex: 1 }}> */}
+          <PickAddress
             prevBtnHandler={() => moveBtnHandler(1)}
             nextBtnHandler={() => moveBtnHandler(3)}
           />
-          <PickStatusImage
+          {/* </KeyboardAvoidingView> */}
+          {/* <PickStatusImage
             title="4번"
             prevBtnHandler={() => moveBtnHandler(2)}
             nextBtnHandler={() => moveBtnHandler(4)}
-          />
-          <PickStatusImage
+          /> */}
+          {/* <PickStatusImage
             title="5번"
             prevBtnHandler={() => moveBtnHandler(3)}
             nextBtnHandler={() => moveBtnHandler(5)}
-          />
-          <PickStatusImage
+          /> */}
+          {/* <PickStatusImage
             title="6번"
             prevBtnHandler={() => moveBtnHandler(4)}
             nextBtnHandler={() => moveBtnHandler(6)}
-          />
-          <PickStatusImage
+          /> */}
+          {/* <PickStatusImage
             title="7번"
             prevBtnHandler={() => moveBtnHandler(5)}
             nextBtnHandler={() => moveBtnHandler(7)}
-          />
-          <PickStatusImage
+          /> */}
+          {/* <PickStatusImage
             title="8번"
             prevBtnHandler={() => moveBtnHandler(6)}
           /> */}
