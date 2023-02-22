@@ -11,8 +11,6 @@ import MoveBtn from "../buttons/MoveBtn";
 import TopInformation from "../items/TopInformation";
 import WritePageBorder from "./WritePageBorder";
 import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
-import * as MediaLibrary from "expo-media-library";
 import * as ImageManipulator from "expo-image-manipulator";
 import { BACK_API } from "react-native-dotenv";
 import { useState } from "react";

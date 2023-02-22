@@ -18,7 +18,11 @@ const FriendListScreen = () => {
           style={styles.searchIcon}
           source={require("@assets/icons/search.png")}
         />
-        <TextInput style={styles.searchInput} placeholder=" 친구 검색" />
+        <TextInput
+          style={styles.searchInput}
+          cursorColor={`${theme.colors.mainPurple}`}
+          placeholder=" 친구 검색"
+        />
       </View>
       <View style={{ height: "50%" }}>
         <ScrollView

@@ -1,22 +1,21 @@
-import { memo } from "react";
 import {
   Dimensions,
-  Image,
+  KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
-import theme from "../../utils/theme";
 import MoveBtn from "../buttons/MoveBtn";
+import WriteContentsInput from "../inputs/WriteContentsInput";
+import WriteTitleInput from "../inputs/WriteTitleInput";
 import TopInformation from "../items/TopInformation";
 import WritePageBorder from "./WritePageBorder";
 const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
-const PickStatusImage = ({
+const PickDaily = ({
   name,
   intro,
-  data,
+
   prevBtnHandler,
   nextBtnHandler,
 }) => {
@@ -28,26 +27,18 @@ const PickStatusImage = ({
           style={{
             width: "100%",
             height: "80%",
-            paddingTop: 36,
-            paddingHorizontal: 12,
+            paddingTop: 32,
+            paddingHorizontal: 24,
           }}
         >
-          <ScrollView
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            style={{
-              height: 100,
-            }}
-          >
-            <View style={styles.statusImgContainer}>
-              {data.map((el) => (
-                <View key={el.id} style={styles.statusImgBox}>
-                  <Image style={styles.statusImg} source={el.img} />
-                  <Text style={styles.statusImgText}>{el.title}</Text>
-                </View>
-              ))}
-            </View>
-          </ScrollView>
+          <WriteTitleInput placeholder=" 20자 이내로 제목을 입력해 주세요." />
+          <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
+            <ScrollView style={{ height: "100%" }}>
+              <WriteContentsInput placeholder=" 첫 번 째 줄을 입력해 주세요." />
+              <WriteContentsInput placeholder=" 두 번 째 줄을 입력해 주세요." />
+              <WriteContentsInput placeholder=" 세 번 째 줄을 입력해 주세요." />
+            </ScrollView>
+          </KeyboardAvoidingView>
         </View>
         <View style={styles.buttonBox}>
           {prevBtnHandler && (
@@ -62,7 +53,7 @@ const PickStatusImage = ({
   );
 };
 
-export default memo(PickStatusImage);
+export default PickDaily;
 
 const styles = StyleSheet.create({
   container: {
@@ -77,29 +68,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  },
-  statusImgContainer: {
-    flexDirection: "row",
-
-    alignItems: "center",
-    width: "100%",
-    height: "100%",
-    flexWrap: "wrap",
-  },
-  statusImgBox: {
-    marginBottom: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "33.3%",
-  },
-  statusImg: {
-    width: 60,
-    height: 60,
-    marginBottom: 16,
-  },
-  statusImgText: {
-    color: `${theme.colors.mainPurple}`,
-    fontSize: 16,
-    fontFamily: "spoqaB",
   },
 });

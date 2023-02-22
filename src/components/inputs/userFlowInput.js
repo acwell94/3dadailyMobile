@@ -22,6 +22,7 @@ const UserFlowInput = (
         ref={ref}
         placeholder={placeholder}
         placeholderTextColor={`${theme.colors.inputBorder}`}
+        cursorColor={`${theme.colors.mainPurple}`}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
         onSubmitEditing={onSubmitEditing}

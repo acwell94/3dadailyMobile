@@ -15,6 +15,7 @@ const EditInputBox = ({ title, defaultData, style }) => {
       <TextInput
         style={styles.input}
         placeholderTextColor={`${theme.colors.inputBorder}`}
+        cursorColor={`${theme.colors.mainPurple}`}
         placeholder={defaultData}
       />
     </Pressable>

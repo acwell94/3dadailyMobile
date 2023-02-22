@@ -12,6 +12,7 @@ import { Feeling, Weather, What, WithWhom } from "../../../utils/contents";
 
 import PickAddress from "../../../components/writeItem/PickAddress";
 import PickImage from "../../../components/writeItem/PickImage";
+import PickDaily from "../../../components/writeItem/PickDaily";
 const { width } = Dimensions.get("window");
 const Write = () => {
   const writeScrollRef = useRef(null);
@@ -100,10 +101,11 @@ const Write = () => {
             prevBtnHandler={() => moveBtnHandler(5)}
             nextBtnHandler={() => moveBtnHandler(7)}
           />
-          {/* <PickStatusImage
-            title="8번"
+          <PickDaily
+            name="민영"
+            intro="님, 오늘의 추억을 남겨주세요."
             prevBtnHandler={() => moveBtnHandler(6)}
-          /> */}
+          />
         </ScrollView>
       </View>
     </View>

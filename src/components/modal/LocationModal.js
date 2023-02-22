@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     container: {},
     textInputContainer: {
       flexDirection: "row",
-      //   marginBottom: -4,
     },
     textInput: {
       backgroundColor: `${theme.colors.gray}`,
@@ -83,8 +82,6 @@ const styles = StyleSheet.create({
     listView: {
       backgroundColor: "#ffffff",
       borderRadius: 10,
-      //   borderBottomLeftRadius: 10,
-      //   borderBottomRightRadius: 10,
       paddingHorizontal: 10,
       elevation: 8,
       shadowColor: "#6164BB",

@@ -17,6 +17,7 @@ const colors = {
   white: "#ffffff",
   red: "#FD2E00",
   inputBorder: "#999999",
+  inputBorderLight: "#d2d2d2",
 };
 
 const theme = {
