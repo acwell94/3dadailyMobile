@@ -105,6 +105,7 @@ const Write = () => {
             name="민영"
             intro="님, 오늘의 추억을 남겨주세요."
             prevBtnHandler={() => moveBtnHandler(6)}
+            nextBtnHandler={"1"}
           />
         </ScrollView>
       </View>

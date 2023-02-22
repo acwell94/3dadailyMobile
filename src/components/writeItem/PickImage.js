@@ -128,7 +128,7 @@ const PickImage = ({ name, intro, prevBtnHandler, nextBtnHandler }) => {
             <MoveBtn btnTitle="이전" onPress={prevBtnHandler} isLight={true} />
           )}
           {nextBtnHandler && (
-            <MoveBtn btnTitle="다음" onPress={nextBtnHandler} />
+            <MoveBtn btnTitle="다음" onPress={uploadImageHandler} />
           )}
         </View>
       </WritePageBorder>
