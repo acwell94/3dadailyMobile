@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -17,10 +17,10 @@ import { BACK_API } from "react-native-dotenv";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const SignInScreen = () => {
-  console.log(BACK_API);
   const navigation = useNavigation();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [signInForm, setSignInForm] = useState({
     email: "",
     password: "",
@@ -39,11 +39,17 @@ const SignInScreen = () => {
       [name]: text,
     }));
   };
+
   const signInHandler = async () => {
+    setError({
+      emailError: false,
+      passwordError: false,
+    });
+    setIsLoading((prev) => !prev);
     try {
       const { data } = await axios.post(`${BACK_API}users/login`, {
-        email: "test@test.com",
-        password: "moon1808316@",
+        email: signInForm.email,
+        password: signInForm.password,
       });
       await AsyncStorage.setItem(
         "data",
@@ -58,9 +64,23 @@ const SignInScreen = () => {
         "refreshToken",
         JSON.stringify(data.refreshToken)
       );
-      navigation.reset({ routes: [{ name: "Home" }] });
+      setIsLoading((prev) => !prev);
+      // navigation.reset({ routes: [{ name: "Home" }] });
     } catch (err) {
-      console.log(err);
+      setIsLoading((prev) => !prev);
+      if (err.response.data.message === "회원 정보가 없습니다.") {
+        setError((prev) => ({
+          ...prev,
+          emailError: true,
+        }));
+      } else if (
+        err.response.data.message === "비밀번호가 올바르지 않습니다."
+      ) {
+        setError((prev) => ({
+          ...prev,
+          passwordError: true,
+        }));
+      }
     }
   };
 
@@ -84,6 +104,7 @@ const SignInScreen = () => {
                 passwordRef.current.focus();
               }}
               onChange={(e) => changeSignInFormHandler(e, "email")}
+              returnKeyType="next"
             />
             <UserFlowInput
               ref={passwordRef}
@@ -121,6 +142,7 @@ const SignInScreen = () => {
           text="로그인"
           isComplete={signInForm.email && signInForm.password}
           onPress={signInHandler}
+          isLoading={isLoading}
         />
       </View>
     </Pressable>

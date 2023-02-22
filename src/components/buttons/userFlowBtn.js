@@ -1,7 +1,7 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
 import theme from "../../utils/theme";
 
-const UserFlowBtn = ({ btnStyle, text, isComplete, onPress }) => {
+const UserFlowBtn = ({ btnStyle, text, isComplete, onPress, isLoading }) => {
   return (
     <Pressable
       onPress={onPress}
@@ -17,7 +17,11 @@ const UserFlowBtn = ({ btnStyle, text, isComplete, onPress }) => {
       ]}
       disabled={!isComplete}
     >
-      <Text style={[styles.text]}>{text}</Text>
+      {isLoading ? (
+        <ActivityIndicator size="small" color={`${theme.colors.ashBlue}`} />
+      ) : (
+        <Text style={[styles.text]}>{text}</Text>
+      )}
     </Pressable>
   );
 };
@@ -27,8 +31,9 @@ export default UserFlowBtn;
 const styles = StyleSheet.create({
   btnBox: {
     alignItems: "center",
-    paddingVertical: 16,
+    justifyContent: "center",
     borderRadius: 8,
+    minHeight: 50,
   },
   text: {
     fontFamily: "spoqaB",

@@ -13,6 +13,7 @@ const UserFlowInput = (
     errorText,
     style,
     inputStyle,
+    returnKeyType,
   },
   ref
 ) => {
@@ -29,6 +30,7 @@ const UserFlowInput = (
         onChange={onChange}
         autoCapitalize={"none"}
         style={[styles.input, { ...inputStyle }]}
+        returnKeyType={returnKeyType}
       />
       <Text style={[styles.text, { opacity: error ? 1 : 0 }]}>{errorText}</Text>
     </View>
