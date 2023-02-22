@@ -1,9 +1,14 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
+import theme from "../../utils/theme";
 
-const RoundBtn = ({ onPress, text, btnStyle, txtStyle }) => {
+const RoundBtn = ({ onPress, text, btnStyle, txtStyle, isLoading }) => {
   return (
     <Pressable style={[styles.btnBox, { ...btnStyle }]} onPress={onPress}>
-      <Text style={[styles.btnText, { ...txtStyle }]}>{text || "확인"}</Text>
+      {isLoading ? (
+        <ActivityIndicator size="small" color={`${theme.colors.ashBlue}`} />
+      ) : (
+        <Text style={[styles.btnText, { ...txtStyle }]}>{text || "확인"}</Text>
+      )}
     </Pressable>
   );
 };
