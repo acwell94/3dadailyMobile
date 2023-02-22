@@ -15,7 +15,7 @@ const UserFlowBtn = ({ btnStyle, text, isComplete, onPress, isLoading }) => {
           opacity: pressed ? 0.8 : 1,
         },
       ]}
-      disabled={!isComplete}
+      disabled={!isComplete || isLoading}
     >
       {isLoading ? (
         <ActivityIndicator size="small" color={`${theme.colors.ashBlue}`} />

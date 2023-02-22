@@ -1,49 +1,82 @@
+import axios from "axios";
+import { useCallback, useState } from "react";
 import {
   KeyboardAvoidingView,
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 import UserFlowBtn from "../../components/buttons/UserFlowBtn";
 import useNav from "../../components/hooks/useNav";
 import UserFlowInput from "../../components/inputs/UserFlowInput";
-
-const DUMMY = [
-  { id: 0, name: "일영", email: "lemin1@naver.com" },
-  { id: 1, name: "이영", email: "lemin2@naver.com" },
-  { id: 2, name: "삼영", email: "lemin3@naver.com" },
-  { id: 3, name: "사영", email: "lemin4@naver.com" },
-  { id: 4, name: "오영", email: "lemin5@naver.com" },
-  { id: 5, name: "육영", email: "lemin6@naver.com" },
-  { id: 6, name: "칠영", email: "lemin7@naver.com" },
-  { id: 7, name: "팔영", email: "lemin8@naver.com" },
-  { id: 8, name: "구영", email: "lemin9@naver.com" },
-  { id: 9, name: "십영", email: "lemin0@naver.com" },
-  { id: 10, name: "십영", email: "lemin10@naver.com" },
-  { id: 11, name: "십영", email: "lemin11@naver.com" },
-  { id: 12, name: "십영", email: "lemin12@naver.com" },
-  { id: 13, name: "십영", email: "lemin13@naver.com" },
-  { id: 14, name: "십영", email: "lemin14@naver.com" },
-  { id: 15, name: "십영", email: "lemin15@naver.com" },
-  { id: 16, name: "십영", email: "lemin16@naver.com" },
-  { id: 17, name: "십영", email: "lemin17naver.com" },
-];
+import FindIdItem from "../../components/items/FindIdItem";
+import { BACK_API } from "react-native-dotenv";
+import ConfirmModal from "../../components/modal/ConfirmModal";
 
 const FindIdScreen = () => {
+  const [name, setName] = useState("");
+  const [error, setError] = useState(false);
+  const [result, setResult] = useState();
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const closeModalHandler = useCallback(() => {
+    setErrorModalVisible((prev) => !prev);
+  }, []);
+
+  const findIdFormHandler = (e) => {
+    const {
+      nativeEvent: { text },
+    } = e;
+    setName(text);
+  };
+
+  const findIdHandler = async () => {
+    setError(false);
+    if (name.length < 2 || name.length > 6) {
+      setError((prev) => !prev);
+      return null;
+    }
+    setIsLoading((prev) => !prev);
+    try {
+      const { data } = await axios.post(`${BACK_API}users/findId`, {
+        name,
+      });
+      setResult(data);
+      setIsLoading((prev) => !prev);
+    } catch (err) {
+      setResult(null);
+      setErrorModalVisible((prev) => !prev);
+      setIsLoading((prev) => !prev);
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+        <ConfirmModal
+          isVisible={errorModalVisible}
+          closeModalHandler={closeModalHandler}
+          title="아이디가 없습니다."
+        />
         <View style={{ flex: 1 }}>
           <View style={styles.searchBox}>
             <UserFlowInput
               placeholder=" 닉네임"
               keyboardType="email-address"
+              error={error}
               errorText="닉네임은 2글자 이상 6글자 이하입니다."
               style={{ marginBottom: 14 }}
+              onChange={(e) => findIdFormHandler(e)}
+              maxLength={6}
             />
-            <UserFlowBtn text="아이디 찾기" />
+            <UserFlowBtn
+              text="아이디 찾기"
+              onPress={findIdHandler}
+              isComplete={name}
+              isLoading={isLoading}
+            />
           </View>
           <View style={styles.userBox}>
             <ScrollView
@@ -52,12 +85,15 @@ const FindIdScreen = () => {
               showsVerticalScrollIndicator={false}
               style={{ marginBottom: 40 }}
             >
-              {DUMMY.map((el) => (
-                <View key={el.id} style={{ flexDirection: "row" }}>
-                  <Text>{el.name}</Text>
-                  <Text>{el.email}</Text>
-                </View>
-              ))}
+              {result &&
+                result.foundUser.map((el) => (
+                  <FindIdItem
+                    key={el._id}
+                    name={el.name}
+                    email={el.email}
+                    image={el.profileImg}
+                  />
+                ))}
             </ScrollView>
             <UserFlowBtn
               text="로그인"
@@ -75,7 +111,7 @@ export default FindIdScreen;
 
 const styles = StyleSheet.create({
   searchBox: {
-    marginBottom: 40,
+    marginBottom: 30,
   },
   userBox: {
     height: 400,

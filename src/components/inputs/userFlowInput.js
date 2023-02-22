@@ -14,6 +14,7 @@ const UserFlowInput = (
     style,
     inputStyle,
     returnKeyType,
+    maxLength,
   },
   ref
 ) => {
@@ -31,6 +32,7 @@ const UserFlowInput = (
         autoCapitalize={"none"}
         style={[styles.input, { ...inputStyle }]}
         returnKeyType={returnKeyType}
+        maxLength={maxLength}
       />
       <Text style={[styles.text, { opacity: error ? 1 : 0 }]}>{errorText}</Text>
     </View>

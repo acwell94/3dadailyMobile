@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -65,7 +65,7 @@ const SignInScreen = () => {
         JSON.stringify(data.refreshToken)
       );
       setIsLoading((prev) => !prev);
-      // navigation.reset({ routes: [{ name: "Home" }] });
+      navigation.reset({ routes: [{ name: "Home" }] });
     } catch (err) {
       setIsLoading((prev) => !prev);
       if (err.response.data.message === "회원 정보가 없습니다.") {
