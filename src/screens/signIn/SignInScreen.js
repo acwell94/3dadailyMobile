@@ -13,8 +13,11 @@ import UserFlowBtn from "../../components/buttons/UserFlowBtn";
 import useNav from "../../components/hooks/useNav";
 import UserFlowInput from "../../components/inputs/UserFlowInput";
 import theme from "../../utils/theme";
-
+import { BACK_API } from "react-native-dotenv";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const SignInScreen = () => {
+  console.log(BACK_API);
   const navigation = useNavigation();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -36,16 +39,29 @@ const SignInScreen = () => {
       [name]: text,
     }));
   };
-  const toastTest = () => {
-    // console.log("hi");
-    // ToastAndroid.showWithGravityAndOffset(
-    //   "로그인",
-    //   ToastAndroid.SHORT,
-    //   ToastAndroid.BOTTOM,
-    //   0,
-    //   800
-    // );
-    navigation.navigate("Home");
+  const signInHandler = async () => {
+    try {
+      const { data } = await axios.post(`${BACK_API}users/login`, {
+        email: "test@test.com",
+        password: "moon1808316@",
+      });
+      await AsyncStorage.setItem(
+        "data",
+        JSON.stringify({
+          userId: data.userId,
+          email: data.email,
+          name: data.name,
+        })
+      );
+      await AsyncStorage.setItem("accessToken", JSON.stringify(data.token));
+      await AsyncStorage.setItem(
+        "refreshToken",
+        JSON.stringify(data.refreshToken)
+      );
+      navigation.reset({ routes: [{ name: "Home" }] });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -104,7 +120,7 @@ const SignInScreen = () => {
         <UserFlowBtn
           text="로그인"
           isComplete={signInForm.email && signInForm.password}
-          onPress={toastTest}
+          onPress={signInHandler}
         />
       </View>
     </Pressable>

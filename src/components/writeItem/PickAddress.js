@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Dimensions, Pressable } from "react-native";
 import TopInformation from "../items/TopInformation";
 import WritePageBorder from "./WritePageBorder";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import MapView from "react-native-maps";
 import MoveBtn from "../buttons/MoveBtn";
@@ -12,16 +12,16 @@ import SelectBtn from "../buttons/SelectBtn";
 
 const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
-const PickAddress = ({ prevBtnHandler, nextBtnHandler }) => {
+const PickAddress = ({ name, intro, prevBtnHandler, nextBtnHandler }) => {
   const [locationModalVisible, setLocationModalVisible] = useState(false);
-  const searchRef = useRef(null);
+
   const [where, setWhere] = useState({
     placeName: "서울시청",
     address: "서울특별시 시청앞",
     lat: 37.5648406,
     lng: 126.977303,
   });
-  console.log(where, "1번");
+
   const locationModalHandler = () => {
     setLocationModalVisible((prev) => !prev);
   };
@@ -43,11 +43,7 @@ const PickAddress = ({ prevBtnHandler, nextBtnHandler }) => {
         modalHandler={locationModalHandler}
         autoCompleteHandler={autoCompleteResultHandler}
       />
-      <TopInformation
-        name="민영"
-        intro="안녕하세요"
-        style={{ marginBottom: 16 }}
-      />
+      <TopInformation name={name} intro={intro} style={{ marginBottom: 16 }} />
 
       <WritePageBorder>
         <View

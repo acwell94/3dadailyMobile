@@ -8,9 +8,10 @@ import {
 } from "react-native";
 import PickDate from "../../../components/writeItem/PickDate";
 import PickStatusImage from "../../../components/writeItem/PickStatusImage";
-import { Weather } from "../../../utils/contents";
+import { Feeling, Weather, What, WithWhom } from "../../../utils/contents";
 
 import PickAddress from "../../../components/writeItem/PickAddress";
+import PickImage from "../../../components/writeItem/PickImage";
 const { width } = Dimensions.get("window");
 const Write = () => {
   const writeScrollRef = useRef(null);
@@ -58,39 +59,47 @@ const Write = () => {
             nextBtnHandler={() => moveBtnHandler(1)}
           />
           <PickStatusImage
-            title="2번"
             name="민영"
             intro="님, 오늘 날씨는 어땠나요?"
             data={Weather}
             prevBtnHandler={() => moveBtnHandler(0)}
             nextBtnHandler={() => moveBtnHandler(2)}
           />
-          {/* <KeyboardAvoidingView style={{ flex: 1 }}> */}
+
           <PickAddress
+            name="민영"
+            intro="님, 오늘 어디에 있었나요?"
             prevBtnHandler={() => moveBtnHandler(1)}
             nextBtnHandler={() => moveBtnHandler(3)}
           />
-          {/* </KeyboardAvoidingView> */}
-          {/* <PickStatusImage
-            title="4번"
+
+          <PickStatusImage
+            name="민영"
+            intro="님, 오늘 누구와 있었나요?"
+            data={WithWhom}
             prevBtnHandler={() => moveBtnHandler(2)}
             nextBtnHandler={() => moveBtnHandler(4)}
-          /> */}
-          {/* <PickStatusImage
-            title="5번"
+          />
+          <PickStatusImage
+            name="민영"
+            intro="님, 오늘 무엇을 하셨나요?"
+            data={What}
             prevBtnHandler={() => moveBtnHandler(3)}
             nextBtnHandler={() => moveBtnHandler(5)}
-          /> */}
-          {/* <PickStatusImage
-            title="6번"
+          />
+          <PickStatusImage
+            name="민영"
+            intro="님, 오늘 기분은 어땠나요?"
+            data={Feeling}
             prevBtnHandler={() => moveBtnHandler(4)}
             nextBtnHandler={() => moveBtnHandler(6)}
-          /> */}
-          {/* <PickStatusImage
-            title="7번"
+          />
+          <PickImage
+            name="민영"
+            intro="님, 오늘을 기념할 사진이 있나요?"
             prevBtnHandler={() => moveBtnHandler(5)}
             nextBtnHandler={() => moveBtnHandler(7)}
-          /> */}
+          />
           {/* <PickStatusImage
             title="8번"
             prevBtnHandler={() => moveBtnHandler(6)}
