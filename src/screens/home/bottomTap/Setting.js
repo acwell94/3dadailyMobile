@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { useRecoilState } from "recoil";
-import useNav from "../../../components/hooks/useNav";
+
+import useAuth from "../../../components/hooks/useAuth";
 import SettingBox from "../../../components/items/SettingBox";
 import SettingProfileBox from "../../../components/items/SettingProfileBox";
 import AskModal from "../../../components/modal/AskModal";
@@ -10,6 +11,7 @@ import { userState } from "../../../components/store";
 import theme from "../../../utils/theme";
 
 const Setting = () => {
+  useAuth();
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useRecoilState(userState);
   const [logoutModalIsVisible, setLogoutModalIsVisible] = useState(false);
@@ -46,7 +48,7 @@ const Setting = () => {
       />
       <SettingBox
         title="친구관리"
-        onPress={() => navigation.navigate("FriendList")}
+        onPress={() => navigation.navigate("FriendList", { userInfo })}
       />
       <SettingBox
         title="비밀번호 재설정"

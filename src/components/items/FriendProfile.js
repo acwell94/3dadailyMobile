@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import FriendListButton from "../buttons/FriendListButton";
 
-const FriendProfile = ({ name, btnTitle }) => {
+const FriendProfile = ({ name, btnTitle, profileImg, onPress }) => {
   return (
     <View
       style={{
@@ -14,11 +14,15 @@ const FriendProfile = ({ name, btnTitle }) => {
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Image
           style={styles.profileImg}
-          source={require("@assets/testImage/testImg.png")}
+          source={
+            profileImg
+              ? { uri: profileImg }
+              : require("@assets/testImage/testImg.png")
+          }
         />
         <Text style={styles.name}>{name}</Text>
       </View>
-      <FriendListButton title={btnTitle} />
+      <FriendListButton title={btnTitle} onPress={onPress} />
     </View>
   );
 };

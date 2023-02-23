@@ -5,8 +5,6 @@ import EditInputBox from "../../components/items/EditInputBox";
 import EditProfileImage from "../../components/items/EditProfileImage";
 import HeaderBackBtn from "../../components/items/HeaderBackBtn";
 import { userState } from "../../components/store";
-import * as ImagePicker from "expo-image-picker";
-import * as ImageManipulator from "expo-image-manipulator";
 import mime from "mime";
 import { BACK_API } from "react-native-dotenv";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -113,6 +111,7 @@ const EditProfileScreen = () => {
         />
       </View>
       <FullWidthButton
+        isDisabled={!image && !editName}
         buttonTitle="수정하기"
         onPress={editProfile}
         isLoading={isLoading}

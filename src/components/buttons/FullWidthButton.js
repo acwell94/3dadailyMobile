@@ -7,10 +7,11 @@ import {
 } from "react-native";
 import theme from "../../utils/theme";
 
-const FullWidthButton = ({ buttonTitle, onPress, isLoading }) => {
+const FullWidthButton = ({ buttonTitle, onPress, isLoading, isDisabled }) => {
   return (
     <View style={styles.buttonLimit}>
       <Pressable
+        disabled={isDisabled}
         onPress={onPress}
         style={({ pressed }) => [
           styles.button,
@@ -18,6 +19,7 @@ const FullWidthButton = ({ buttonTitle, onPress, isLoading }) => {
             backgroundColor: pressed
               ? `${theme.colors.mainPurple}`
               : `${theme.colors.deepPurple}`,
+            opacity: isDisabled ? 0.5 : 1,
           },
         ]}
       >

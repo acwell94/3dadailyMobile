@@ -1,9 +1,10 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import theme from "../../utils/theme";
 
-const FriendListButton = ({ title }) => {
+const FriendListButton = ({ title, onPress }) => {
   return (
     <Pressable
+      onPress={onPress}
       style={[
         styles.btnContainer,
         title === "삭제"

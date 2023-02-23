@@ -22,7 +22,8 @@ const useAuth = () => {
       ]);
     } else {
       try {
-        const data = await axios.post(
+        console.log("토큰 검사");
+        await axios.post(
           `${BACK_API}users/token`,
           {},
           {
@@ -32,13 +33,16 @@ const useAuth = () => {
           }
         );
       } catch (err) {
+        console.log("토큰에러");
         try {
+          console.log("체크유저");
           const response = await axios.post(`${BACK_API}users/checkUser`, {
             refresh: JSON.parse(refreshToken),
           });
           const { token } = response.data;
           await AsyncStorage.setItem("accessToken", JSON.stringify(token));
         } catch (err) {
+          console.log("체크실패");
           Alert.alert("인증이 만료되었습니다.", "로그인 페이지로 이동합니다.", [
             {
               text: "이동",
