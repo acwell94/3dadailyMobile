@@ -103,6 +103,7 @@ const EditProfileScreen = () => {
         profileImg={userInfo.profileImg}
         editImage={image}
         onPress={pickHandler}
+        isEdit={true}
       />
       <View style={{ paddingHorizontal: 24 }}>
         <EditInputBox

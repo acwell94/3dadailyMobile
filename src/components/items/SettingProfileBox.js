@@ -28,7 +28,7 @@ const SettingProfileBox = ({ onPress, name, profileImg }) => {
       </View>
       <Image
         style={styles.arrowImg}
-        source={require("@assets/icons/downArrow.png")}
+        source={require("@assets/icons/rightArrow.png")}
       />
     </Pressable>
   );
@@ -57,6 +57,5 @@ const styles = StyleSheet.create({
   arrowImg: {
     width: 18,
     height: 18,
-    transform: [{ rotate: "-90deg" }],
   },
 });

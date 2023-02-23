@@ -1,6 +1,6 @@
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
-const EditProfileImage = ({ profileImg, onPress, editImage }) => {
+const EditProfileImage = ({ profileImg, onPress, editImage, isEdit }) => {
   return (
     <View
       style={{
@@ -23,10 +23,12 @@ const EditProfileImage = ({ profileImg, onPress, editImage }) => {
             }
           />
         )}
-        <Image
-          style={styles.editIcon}
-          source={require("@assets/icons/profileEditIcon.png")}
-        />
+        {isEdit && (
+          <Image
+            style={styles.editIcon}
+            source={require("@assets/icons/profileEditIcon.png")}
+          />
+        )}
       </Pressable>
     </View>
   );

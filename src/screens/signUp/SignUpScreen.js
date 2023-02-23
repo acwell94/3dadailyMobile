@@ -22,6 +22,7 @@ import UserFlowInput from "../../components/inputs/UserFlowInput";
 import theme from "../../utils/theme";
 import { useNavigation } from "@react-navigation/native";
 import ConfirmModal from "../../components/modal/ConfirmModal";
+import useImageUpload from "../../components/hooks/useImageUpload";
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -32,7 +33,6 @@ const SignUpScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [signUpError, setSignUpError] = useState("");
-  const [image, setImage] = useState("");
   const [signUpForm, setSignUpForm] = useState({
     name: "",
     email: "",
@@ -46,7 +46,7 @@ const SignUpScreen = () => {
     password: false,
     passwordConfirm: false,
   });
-
+  const { image, pickHandler } = useImageUpload();
   const changeSignUpFormHandler = (e, name) => {
     const {
       nativeEvent: { text },
@@ -97,40 +97,6 @@ const SignUpScreen = () => {
   const closeModalHandler = useCallback(() => {
     setErrorModalVisible((prev) => !prev);
   }, []);
-
-  const ProfileImageUpload = async () => {
-    const checkMediaLibraryPermission =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (checkMediaLibraryPermission.status === "denied") {
-      Alert.alert(
-        "사진첩 권한을 허용해 주세요.",
-        "프로필을 등록하지 않으면 이용하실 수 없습니다.",
-        [
-          {
-            text: "확인",
-            style: "cancel",
-          },
-        ]
-      );
-    } else {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: false,
-        quality: 0.5,
-        aspect: [1, 1],
-      });
-      if (result.canceled) {
-        return null;
-      }
-      const file = await ImageManipulator.manipulateAsync(
-        result.assets[0].uri,
-        [],
-        { compress: 0.5, format: ImageManipulator.SaveFormat.PNG }
-      );
-
-      setImage(file.uri);
-    }
-  };
 
   const signUpHandler = async () => {
     setIsLoading((prev) => !prev);
@@ -196,10 +162,7 @@ const SignUpScreen = () => {
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
             >
-              <Pressable
-                style={styles.profileImgBox}
-                onPress={ProfileImageUpload}
-              >
+              <Pressable style={styles.profileImgBox} onPress={pickHandler}>
                 {image ? (
                   <View>
                     <Image style={styles.profileImg} source={{ uri: image }} />
