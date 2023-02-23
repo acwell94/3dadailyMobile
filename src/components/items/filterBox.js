@@ -11,7 +11,7 @@ import { Feeling, Weather, WithWhom } from "../../utils/contents";
 import theme from "../../utils/theme";
 import FilterImage from "./FilterImage";
 
-const FilterBox = ({ name }) => {
+const FilterBox = ({ name, count, getSortedContents, selected }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ const FilterBox = ({ name }) => {
         <View style={styles.filterInfo}>
           <View style={styles.manyOfContents}>
             <Text style={styles.serviceName}>3다일기</Text>
-            <Text style={styles.contents}>215</Text>
+            <Text style={styles.contents}>{count}</Text>
           </View>
           <View>
             <Text style={styles.who}>{name} 님의 추억을 찾아보세요</Text>
@@ -51,7 +51,12 @@ const FilterBox = ({ name }) => {
               showsVerticalScrollIndicator={false}
             >
               {Feeling.map((el) => (
-                <FilterImage key={el.id} data={el} />
+                <FilterImage
+                  key={el.id}
+                  data={el}
+                  selected={selected}
+                  onPress={getSortedContents}
+                />
               ))}
             </ScrollView>
           </View>
@@ -64,7 +69,12 @@ const FilterBox = ({ name }) => {
               showsVerticalScrollIndicator={false}
             >
               {Weather.map((el) => (
-                <FilterImage key={el.id} data={el} />
+                <FilterImage
+                  key={el.id}
+                  data={el}
+                  selected={selected}
+                  onPress={getSortedContents}
+                />
               ))}
             </ScrollView>
           </View>
@@ -77,7 +87,12 @@ const FilterBox = ({ name }) => {
               showsVerticalScrollIndicator={false}
             >
               {WithWhom.map((el) => (
-                <FilterImage key={el.id} data={el} />
+                <FilterImage
+                  key={el.id}
+                  data={el}
+                  selected={selected}
+                  onPress={getSortedContents}
+                />
               ))}
             </ScrollView>
           </View>

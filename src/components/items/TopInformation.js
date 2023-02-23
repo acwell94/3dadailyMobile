@@ -1,12 +1,14 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import theme from "../../utils/theme";
 
-const TopInformation = ({ name, intro, style }) => {
+const TopInformation = ({ name, intro, style, image }) => {
   return (
     <View style={[styles.container, { ...style }]}>
       <Image
         style={styles.profile}
-        source={require("@assets/icons/defaultProfile.png")}
+        source={
+          image ? { uri: image } : require("@assets/icons/defaultProfile.png")
+        }
       />
       <Text style={[styles.text, styles.name]}>{name}</Text>
       <Text style={[styles.text, styles.intro]}>{intro}</Text>
@@ -23,9 +25,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   profile: {
-    width: 16,
-    height: 16,
+    width: 20,
+    height: 20,
     marginRight: 10,
+    borderRadius: 8,
   },
   text: {
     fontSize: 16,
