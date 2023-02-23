@@ -4,10 +4,45 @@ import theme from "../../utils/theme";
 import Home from "./bottomTap/Home";
 import Write from "./bottomTap/Write";
 import Setting from "./bottomTap/Setting";
-
+import { useRecoilState } from "recoil";
+import { userState } from "../../components/store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect } from "react";
+import { BACK_API } from "react-native-dotenv";
+import axios from "axios";
 const BottomTab = createBottomTabNavigator();
 
 const HomeScreen = () => {
+  const [_, setUserInfo] = useRecoilState(userState);
+
+  const getUserInfo = async () => {
+    const token = await AsyncStorage.getItem("accessToken");
+    const user = await AsyncStorage.getItem("data");
+    try {
+      const { data } = await axios.get(
+        `${BACK_API}users/findUser/${JSON.parse(user).email}`,
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        }
+      );
+
+      setUserInfo({
+        name: data.foundUser.name,
+        userId: data.foundUser.id,
+        profileImg: data.foundUser.profileImg,
+        email: data.foundUser.email,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   return (
     <BottomTab.Navigator
       initialRouteName="홈"

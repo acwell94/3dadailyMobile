@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import theme from "../../utils/theme";
 
-const EditInputBox = ({ title, defaultData, style }) => {
+const EditInputBox = ({ title, defaultData, style, onChange }) => {
   return (
     <Pressable style={{ ...style }} onPress={Keyboard.dismiss}>
       <Text style={styles.title}>{title}</Text>
@@ -17,6 +17,7 @@ const EditInputBox = ({ title, defaultData, style }) => {
         placeholderTextColor={`${theme.colors.inputBorder}`}
         cursorColor={`${theme.colors.mainPurple}`}
         placeholder={defaultData}
+        onChange={onChange}
       />
     </Pressable>
   );

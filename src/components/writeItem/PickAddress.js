@@ -35,7 +35,7 @@ const PickAddress = ({ name, intro, prevBtnHandler, nextBtnHandler }) => {
     });
     setLocationModalVisible((prev) => !prev);
   };
-  console.log(where, "2번");
+
   return (
     <View style={styles.container}>
       <LocationModal

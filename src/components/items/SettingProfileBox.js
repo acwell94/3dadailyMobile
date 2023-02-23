@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import theme from "../../utils/theme";
 
-const SettingProfileBox = ({ onPress }) => {
+const SettingProfileBox = ({ onPress, name, profileImg }) => {
   return (
     <Pressable
       style={{
@@ -15,10 +15,14 @@ const SettingProfileBox = ({ onPress }) => {
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Image
           style={styles.profileImg}
-          source={require("@assets/testImage/testImg.png")}
+          source={
+            profileImg
+              ? { uri: profileImg }
+              : require("@assets/icons/editProfile.png")
+          }
         />
         <View>
-          <Text style={styles.name}>김민영</Text>
+          <Text style={styles.name}>{name}</Text>
           <Text style={styles.editInfo}>내 정보 수정하기</Text>
         </View>
       </View>

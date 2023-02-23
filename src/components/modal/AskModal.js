@@ -8,6 +8,7 @@ const AskModal = ({
   secondText,
   warningText,
   optionTitle,
+  optionHandler,
 }) => {
   return (
     <Modal visible={isVisible} animationType="fade" transparent={true}>
@@ -15,12 +16,12 @@ const AskModal = ({
         <View style={styles.modalBox}>
           <View style={styles.modalTextBox}>
             <Text style={styles.modalText}>{firstText}</Text>
-            <Text style={styles.modalText}>{secondText}</Text>
+            {secondText && <Text style={styles.modalText}>{secondText}</Text>}
             {warningText && (
               <Text style={styles.warningText}>{warningText}</Text>
             )}
           </View>
-          <Pressable style={styles.modalButtonBox}>
+          <Pressable style={styles.modalButtonBox} onPress={optionHandler}>
             <Text
               style={[styles.modalButtonText, { color: `${theme.colors.red}` }]}
             >
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalBox: {
-    width: "60%",
+    width: "70%",
     backgroundColor: `${theme.colors.white}`,
     borderRadius: 8,
     justifyContent: "center",

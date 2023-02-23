@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     fontFamily: "spoqaB",
     fontSize: 16,
     color: `${theme.colors.blackGray}`,
+    textAlign: "center",
   },
   modalButtonBox: {
     width: "100%",

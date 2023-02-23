@@ -1,14 +1,17 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { Text, View } from "react-native";
+import { useRecoilState } from "recoil";
 import useNav from "../../../components/hooks/useNav";
 import SettingBox from "../../../components/items/SettingBox";
 import SettingProfileBox from "../../../components/items/SettingProfileBox";
 import AskModal from "../../../components/modal/AskModal";
+import { userState } from "../../../components/store";
 import theme from "../../../utils/theme";
 
 const Setting = () => {
   const navigation = useNavigation();
+  const [userInfo, setUserInfo] = useRecoilState(userState);
   const [logoutModalIsVisible, setLogoutModalIsVisible] = useState(false);
   const [withDrawerModalIsVisible, setWithDrawerModalIsVisible] =
     useState(false);
@@ -18,6 +21,7 @@ const Setting = () => {
   const withDrawerModalHandler = () => {
     setWithDrawerModalIsVisible((prev) => !prev);
   };
+  // console.log(userInfo);
   return (
     <View style={{ flex: 1, backgroundColor: "white", paddingHorizontal: 24 }}>
       <AskModal
@@ -36,7 +40,9 @@ const Setting = () => {
         optionTitle="로그아웃"
       />
       <SettingProfileBox
-        onPress={() => navigation.navigate("SettingProfile")}
+        name={userInfo.name}
+        profileImg={userInfo.profileImg}
+        onPress={() => navigation.navigate("SettingProfile", { userInfo })}
       />
       <SettingBox
         title="친구관리"

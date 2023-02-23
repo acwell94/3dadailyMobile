@@ -1,10 +1,17 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import theme from "../../utils/theme";
 
-const FullWidthButton = ({ buttonTitle }) => {
+const FullWidthButton = ({ buttonTitle, onPress, isLoading }) => {
   return (
     <View style={styles.buttonLimit}>
       <Pressable
+        onPress={onPress}
         style={({ pressed }) => [
           styles.button,
           {
@@ -14,7 +21,11 @@ const FullWidthButton = ({ buttonTitle }) => {
           },
         ]}
       >
-        <Text style={styles.buttonTitle}>{buttonTitle}</Text>
+        {isLoading ? (
+          <ActivityIndicator size="small" color={`${theme.colors.ashBlue}`} />
+        ) : (
+          <Text style={styles.buttonTitle}>{buttonTitle}</Text>
+        )}
       </Pressable>
     </View>
   );
@@ -33,9 +44,9 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 16,
     borderRadius: 8,
     elevation: 4,
+    minHeight: 50,
   },
   buttonTitle: {
     fontFamily: "spoqaB",
