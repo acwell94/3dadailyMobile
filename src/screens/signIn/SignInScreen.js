@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -16,6 +16,7 @@ import theme from "../../utils/theme";
 import { BACK_API } from "react-native-dotenv";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const SignInScreen = () => {
   const navigation = useNavigation();
   const emailRef = useRef(null);
@@ -47,29 +48,32 @@ const SignInScreen = () => {
     });
     setIsLoading((prev) => !prev);
     try {
-      console.log("1");
       const { data } = await axios.post(`${BACK_API}users/login`, {
         email: signInForm.email,
         password: signInForm.password,
       });
-      await AsyncStorage.setItem(
-        "data",
-        JSON.stringify({
-          userId: data.userId,
-          email: data.email,
-          name: data.name,
-        })
-      );
-      await AsyncStorage.setItem("accessToken", JSON.stringify(data.token));
-      await AsyncStorage.setItem(
-        "refreshToken",
-        JSON.stringify(data.refreshToken)
-      );
+      try {
+        await AsyncStorage.setItem(
+          "data",
+          JSON.stringify({
+            userId: data.userId,
+            email: data.email,
+            name: data.name,
+          })
+        );
+        await AsyncStorage.setItem("accessToken", JSON.stringify(data.token));
+        await AsyncStorage.setItem(
+          "refreshToken",
+          JSON.stringify(data.refreshToken)
+        );
+      } catch (err) {
+        console.log(err);
+      }
       setIsLoading((prev) => !prev);
       navigation.reset({ routes: [{ name: "Home" }] });
     } catch (err) {
-      console.log(err);
       setIsLoading((prev) => !prev);
+      console.log(err);
       if (err.response.data.message === "회원 정보가 없습니다.") {
         setError((prev) => ({
           ...prev,
@@ -82,6 +86,8 @@ const SignInScreen = () => {
           ...prev,
           passwordError: true,
         }));
+      } else {
+        console.log(err);
       }
     }
   };
