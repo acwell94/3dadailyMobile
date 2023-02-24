@@ -7,9 +7,9 @@ import Setting from "./bottomTap/Setting";
 import { useRecoilState } from "recoil";
 import { userState } from "../../components/store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect } from "react";
 import { BACK_API } from "react-native-dotenv";
 import axios from "axios";
+import { useEffect } from "react";
 const BottomTab = createBottomTabNavigator();
 
 const HomeScreen = () => {

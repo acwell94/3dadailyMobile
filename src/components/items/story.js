@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import theme from "../../utils/theme";
 import useDateForm from "../hooks/useDateForm";
@@ -5,9 +6,14 @@ import useNav from "../hooks/useNav";
 
 const Story = ({ data }) => {
   const { month, date, day } = useDateForm(data.item.date);
-
+  const navigation = useNavigation();
   return (
-    <Pressable style={styles.container} onPress={useNav("Detail")}>
+    <Pressable
+      style={styles.container}
+      onPress={() => {
+        navigation.navigate("Detail", { cid: data.item.id });
+      }}
+    >
       <View style={styles.imageContainer}>
         <Image style={styles.storyImage} source={{ uri: data.item.image }} />
       </View>

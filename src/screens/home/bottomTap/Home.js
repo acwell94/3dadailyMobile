@@ -15,15 +15,6 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useAuth from "../../../components/hooks/useAuth";
 import theme from "../../../utils/theme";
-const DUMMY = [
-  { id: 0 },
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5 },
-  { id: 6 },
-];
 
 const Home = () => {
   useAuth();
