@@ -47,6 +47,7 @@ const SignInScreen = () => {
     });
     setIsLoading((prev) => !prev);
     try {
+      console.log("1");
       const { data } = await axios.post(`${BACK_API}users/login`, {
         email: signInForm.email,
         password: signInForm.password,
@@ -67,6 +68,7 @@ const SignInScreen = () => {
       setIsLoading((prev) => !prev);
       navigation.reset({ routes: [{ name: "Home" }] });
     } catch (err) {
+      console.log(err);
       setIsLoading((prev) => !prev);
       if (err.response.data.message === "회원 정보가 없습니다.") {
         setError((prev) => ({

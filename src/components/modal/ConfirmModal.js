@@ -1,7 +1,7 @@
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import theme from "../../utils/theme";
 
-const ConfirmModal = ({ isVisible, closeModalHandler, title }) => {
+const ConfirmModal = ({ isVisible, closeModalHandler, title, btnText }) => {
   return (
     <Modal visible={isVisible} animationType="fade" transparent={true}>
       <Pressable style={styles.container} onPress={closeModalHandler}>
@@ -14,7 +14,7 @@ const ConfirmModal = ({ isVisible, closeModalHandler, title }) => {
                 { color: `${theme.colors.sliverGray}` },
               ]}
             >
-              확인
+              {btnText ? btnText : "확인"}
             </Text>
           </Pressable>
         </View>

@@ -6,7 +6,6 @@ const useLogout = () => {
   const logout = async () => {
     const keys = ["data", "accessToken", "refreshToken"];
     try {
-      console.log(1);
       await AsyncStorage.multiRemove(keys);
       navigation.reset({ routes: [{ name: "Main" }] });
     } catch (err) {

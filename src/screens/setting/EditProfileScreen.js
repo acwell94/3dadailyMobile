@@ -13,10 +13,10 @@ import { useState } from "react";
 import useImageUpload from "../../components/hooks/useImageUpload";
 import ConfirmModal from "../../components/modal/ConfirmModal";
 import AskModal from "../../components/modal/AskModal";
-
-import { useNavigation } from "@react-navigation/native";
 import useLogout from "../../components/hooks/useLogout";
+import useAuth from "../../components/hooks/useAuth";
 const EditProfileScreen = () => {
+  useAuth();
   const { logout } = useLogout();
   const [userInfo, setUserInfo] = useRecoilState(userState);
   const [editName, setEditName] = useState("");
@@ -57,16 +57,12 @@ const EditProfileScreen = () => {
         type: mime.getType(newImageUri),
         name: newImageUri.split("/").pop(),
       });
-      const response = await axios.patch(
-        `${BACK_API}users/changeProfile`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${JSON.parse(token)}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.patch(`${BACK_API}users/changeProfile`, formData, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setIsLoading((prev) => !prev);
       setSuccessModalTitle({
         first: "프로필이 변경되었습니다.",

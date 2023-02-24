@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { useRecoilState } from "recoil";
+import useLogout from "../../../components/hooks/useLogout";
 
-import useAuth from "../../../components/hooks/useAuth";
 import SettingBox from "../../../components/items/SettingBox";
 import SettingProfileBox from "../../../components/items/SettingProfileBox";
 import AskModal from "../../../components/modal/AskModal";
@@ -11,8 +11,8 @@ import { userState } from "../../../components/store";
 import theme from "../../../utils/theme";
 
 const Setting = () => {
-  useAuth();
   const navigation = useNavigation();
+  const { logout } = useLogout();
   const [userInfo, setUserInfo] = useRecoilState(userState);
   const [logoutModalIsVisible, setLogoutModalIsVisible] = useState(false);
   const [withDrawerModalIsVisible, setWithDrawerModalIsVisible] =
@@ -23,7 +23,7 @@ const Setting = () => {
   const withDrawerModalHandler = () => {
     setWithDrawerModalIsVisible((prev) => !prev);
   };
-  // console.log(userInfo);
+
   return (
     <View style={{ flex: 1, backgroundColor: "white", paddingHorizontal: 24 }}>
       <AskModal
@@ -31,6 +31,7 @@ const Setting = () => {
         closeModalHandler={logoutModalHandler}
         firstText="정말 로그아웃"
         secondText="하시겠습니까?"
+        optionHandler={logout}
         optionTitle="로그아웃"
       />
       <AskModal
@@ -52,7 +53,9 @@ const Setting = () => {
       />
       <SettingBox
         title="비밀번호 재설정"
-        onPress={() => navigation.navigate("EditPassword")}
+        onPress={() =>
+          navigation.navigate("EditPassword", { userId: userInfo.userId })
+        }
       />
       <SettingBox title="로그아웃" onPress={logoutModalHandler} />
       <SettingBox

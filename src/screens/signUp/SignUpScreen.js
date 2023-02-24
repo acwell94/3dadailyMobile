@@ -13,8 +13,6 @@ import {
 import { BACK_API } from "react-native-dotenv";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import * as ImagePicker from "expo-image-picker";
-import * as ImageManipulator from "expo-image-manipulator";
 import mime from "mime";
 import UserFlowBtn from "../../components/buttons/UserFlowBtn";
 import useNav from "../../components/hooks/useNav";

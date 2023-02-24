@@ -15,7 +15,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import useDebounce from "../../components/hooks/useDebounce";
 import ConfirmModal from "../../components/modal/ConfirmModal";
+import useAuth from "../../components/hooks/useAuth";
 const FriendListScreen = ({ route }) => {
+  useAuth();
   const { email, name, profileImg, userId } = route.params.userInfo;
   const [friendData, setFiendData] = useState();
   const [search, setSearch] = useState("");

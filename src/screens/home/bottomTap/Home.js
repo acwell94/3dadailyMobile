@@ -35,6 +35,7 @@ const Home = () => {
 
   const getSortedContents = async (category, sort) => {
     const userData = JSON.parse(await AsyncStorage.getItem("data"));
+
     if (prevSelect.category === category && prevSelect.sort === sort) {
       try {
         const { data } = await axios.get(
@@ -63,6 +64,7 @@ const Home = () => {
 
   const getContents = async () => {
     const userData = JSON.parse(await AsyncStorage.getItem("data"));
+    const token = JSON.parse(await AsyncStorage.getItem("accessToken"));
     try {
       const { data } = await axios.get(
         `${BACK_API}contents/${userData.userId}`

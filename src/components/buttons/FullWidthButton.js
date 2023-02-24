@@ -19,7 +19,9 @@ const FullWidthButton = ({ buttonTitle, onPress, isLoading, isDisabled }) => {
             backgroundColor: pressed
               ? `${theme.colors.mainPurple}`
               : `${theme.colors.deepPurple}`,
-            opacity: isDisabled ? 0.5 : 1,
+            backgroundColor: isDisabled
+              ? `${theme.colors.mainPurple}`
+              : `${theme.colors.deepPurple}`,
           },
         ]}
       >
