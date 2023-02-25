@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import {
   Dimensions,
   KeyboardAvoidingView,
@@ -13,8 +13,28 @@ import { Feeling, Weather, What, WithWhom } from "../../../utils/contents";
 import PickAddress from "../../../components/writeItem/PickAddress";
 import PickImage from "../../../components/writeItem/PickImage";
 import PickDaily from "../../../components/writeItem/PickDaily";
+import useAuth from "../../../components/hooks/useAuth";
 const { width } = Dimensions.get("window");
 const Write = () => {
+  useAuth();
+  const [writeForm, setWriteForm] = useState({
+    title: "",
+    firstContents: "",
+    secondContents: "",
+    thirdContents: "",
+    date: `${new Date()}`,
+    weather: "",
+    address: "",
+    location: {
+      lat: 37.5666805,
+      lng: 126.9784147,
+    },
+    withWhom: "",
+    what: "",
+    feeling: "",
+    image: "",
+  });
+
   const writeScrollRef = useRef(null);
 
   const moveBtnHandler = (times) => {
@@ -29,11 +49,27 @@ const Write = () => {
 
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const handleDateChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShowDatePicker((prev) => !prev);
-    setDate(currentDate);
-  };
+
+  const changeDateHandler = useCallback(
+    (selectedDate) => {
+      console.log(selectedDate, "selected");
+      const currentDate = selectedDate || new Date(writeForm.date);
+      console.log(currentDate, "current");
+      setShowDatePicker((prev) => !prev);
+      setWriteForm((prev) => ({ ...prev, date: String(currentDate) }));
+    },
+    [writeForm.date]
+  );
+
+  console.log(writeForm.date);
+
+  // const handleDateChange = (event, selectedDate) => {
+  //   const currentDate = selectedDate || date;
+  //   console.log(selectedDate, "selected");
+  //   console.log(currentDate, "current");
+  //   setShowDatePicker((prev) => !prev);
+  //   setDate(currentDate);
+  // };
   const datePickerHandler = () => {
     setShowDatePicker((prev) => !prev);
   };
@@ -53,8 +89,8 @@ const Write = () => {
           showsVerticalScrollIndicator={false}
         >
           <PickDate
-            date={date}
-            handleDateChange={handleDateChange}
+            date={new Date(writeForm.date)}
+            handleDateChange={changeDateHandler}
             datePickerHandler={datePickerHandler}
             showDatePicker={showDatePicker}
             nextBtnHandler={() => moveBtnHandler(1)}

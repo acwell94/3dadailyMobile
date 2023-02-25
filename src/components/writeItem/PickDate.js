@@ -14,6 +14,7 @@ const PickDate = ({
   showDatePicker,
   nextBtnHandler,
 }) => {
+  console.log(date, "date");
   return (
     <View style={styles.container}>
       <TopInformation
