@@ -5,6 +5,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import useDisplayDate from "../hooks/useDisplayDate";
 import SelectBtn from "../buttons/SelectBtn";
 import MoveBtn from "../buttons/MoveBtn";
+import { memo } from "react";
 const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
 const PickDate = ({
@@ -14,7 +15,6 @@ const PickDate = ({
   showDatePicker,
   nextBtnHandler,
 }) => {
-  console.log(date, "date");
   return (
     <View style={styles.container}>
       <TopInformation
@@ -43,7 +43,7 @@ const PickDate = ({
   );
 };
 
-export default PickDate;
+export default memo(PickDate);
 
 const styles = StyleSheet.create({
   container: {

@@ -47,32 +47,49 @@ const Write = () => {
 
   // 날짜
 
-  const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const changeDateHandler = useCallback(
-    (selectedDate) => {
-      console.log(selectedDate, "selected");
+    (event, selectedDate) => {
       const currentDate = selectedDate || new Date(writeForm.date);
-      console.log(currentDate, "current");
       setShowDatePicker((prev) => !prev);
       setWriteForm((prev) => ({ ...prev, date: String(currentDate) }));
     },
     [writeForm.date]
   );
 
-  console.log(writeForm.date);
-
-  // const handleDateChange = (event, selectedDate) => {
-  //   const currentDate = selectedDate || date;
-  //   console.log(selectedDate, "selected");
-  //   console.log(currentDate, "current");
-  //   setShowDatePicker((prev) => !prev);
-  //   setDate(currentDate);
-  // };
-  const datePickerHandler = () => {
+  const datePickerHandler = useCallback(() => {
     setShowDatePicker((prev) => !prev);
+  }, [changeDateHandler]);
+
+  // 아이콘
+
+  const changeStatusImageHandler = (name, id) => {
+    setWriteForm((prev) => ({ ...prev, [name]: id }));
   };
+
+  // 장소
+  const [currentLocation, setCurrentLocation] = useState({
+    lat: 37.5648406,
+    lng: 126.977303,
+  });
+  const [locationModalVisible, setLocationModalVisible] = useState(false);
+
+  const changeLocationHandler = useCallback(
+    async (data, details = null) => {
+      setWriteForm((prev) => ({ ...prev, address: data.description }));
+      setCurrentLocation({
+        lat: details.geometry.location.lat,
+        lng: details.geometry.location.lng,
+      });
+      setLocationModalVisible((prev) => !prev);
+    },
+    [writeForm.location]
+  );
+  const locationModalHandler = useCallback(() => {
+    setLocationModalVisible((prev) => !prev);
+  }, [changeLocationHandler]);
+
   return (
     <View
       style={{
@@ -99,8 +116,10 @@ const Write = () => {
             name="민영"
             intro="님, 오늘 날씨는 어땠나요?"
             data={Weather}
+            currentData={writeForm.weather}
             prevBtnHandler={() => moveBtnHandler(0)}
             nextBtnHandler={() => moveBtnHandler(2)}
+            pickHandler={changeStatusImageHandler}
           />
 
           <PickAddress
@@ -108,28 +127,38 @@ const Write = () => {
             intro="님, 오늘 어디에 있었나요?"
             prevBtnHandler={() => moveBtnHandler(1)}
             nextBtnHandler={() => moveBtnHandler(3)}
+            locationHandler={changeLocationHandler}
+            current={currentLocation}
+            locationModalVisible={locationModalVisible}
+            locationModalHandler={locationModalHandler}
           />
 
           <PickStatusImage
             name="민영"
             intro="님, 오늘 누구와 있었나요?"
             data={WithWhom}
+            currentData={writeForm.withWhom}
             prevBtnHandler={() => moveBtnHandler(2)}
             nextBtnHandler={() => moveBtnHandler(4)}
+            pickHandler={changeStatusImageHandler}
           />
           <PickStatusImage
             name="민영"
             intro="님, 오늘 무엇을 하셨나요?"
             data={What}
+            currentData={writeForm.what}
             prevBtnHandler={() => moveBtnHandler(3)}
             nextBtnHandler={() => moveBtnHandler(5)}
+            pickHandler={changeStatusImageHandler}
           />
           <PickStatusImage
             name="민영"
             intro="님, 오늘 기분은 어땠나요?"
             data={Feeling}
+            currentData={writeForm.feeling}
             prevBtnHandler={() => moveBtnHandler(4)}
             nextBtnHandler={() => moveBtnHandler(6)}
+            pickHandler={changeStatusImageHandler}
           />
           <PickImage
             name="민영"

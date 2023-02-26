@@ -6,42 +6,27 @@ import { useState } from "react";
 import { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import MapView from "react-native-maps";
 import MoveBtn from "../buttons/MoveBtn";
-import theme from "../../utils/theme";
 import LocationModal from "../modal/LocationModal";
 import SelectBtn from "../buttons/SelectBtn";
 
 const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
-const PickAddress = ({ name, intro, prevBtnHandler, nextBtnHandler }) => {
-  const [locationModalVisible, setLocationModalVisible] = useState(false);
-
-  const [where, setWhere] = useState({
-    placeName: "서울시청",
-    address: "서울특별시 시청앞",
-    lat: 37.5648406,
-    lng: 126.977303,
-  });
-
-  const locationModalHandler = () => {
-    setLocationModalVisible((prev) => !prev);
-  };
-
-  const autoCompleteResultHandler = async (data, details = null) => {
-    setWhere({
-      placeName: details.name,
-      address: data.description,
-      lat: details.geometry.location.lat,
-      lng: details.geometry.location.lng,
-    });
-    setLocationModalVisible((prev) => !prev);
-  };
-
+const PickAddress = ({
+  name,
+  intro,
+  prevBtnHandler,
+  nextBtnHandler,
+  locationHandler,
+  current,
+  locationModalVisible,
+  locationModalHandler,
+}) => {
   return (
     <View style={styles.container}>
       <LocationModal
         isVisible={locationModalVisible}
         modalHandler={locationModalHandler}
-        autoCompleteHandler={autoCompleteResultHandler}
+        autoCompleteHandler={locationHandler}
       />
       <TopInformation name={name} intro={intro} style={{ marginBottom: 16 }} />
 
@@ -62,8 +47,8 @@ const PickAddress = ({ name, intro, prevBtnHandler, nextBtnHandler }) => {
           <MapView
             style={styles.map}
             region={{
-              latitude: where.lat,
-              longitude: where.lng,
+              latitude: current.lat,
+              longitude: current.lng,
               latitudeDelta: 0.01,
               longitudeDelta: 0.01,
             }}
@@ -71,11 +56,10 @@ const PickAddress = ({ name, intro, prevBtnHandler, nextBtnHandler }) => {
           >
             <Marker
               coordinate={{
-                latitude: where.lat,
-                longitude: where.lng,
+                latitude: current.lat,
+                longitude: current.lng,
               }}
-              pinColor={`${theme.colors.mainPurple}`}
-              title={where.placeName}
+              pinColor={"red"}
             />
           </MapView>
         </View>

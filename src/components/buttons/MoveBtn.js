@@ -5,13 +5,12 @@ const MoveBtn = ({ btnTitle, isLight, style, onPress }) => {
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [
+      style={[
         styles.btn,
         {
           backgroundColor: isLight
             ? `${theme.colors.mainPurple}`
             : `${theme.colors.deepPurple}`,
-          opacity: pressed ? 0.8 : 1,
           marginRight: isLight ? 16 : 0,
         },
         { ...style },

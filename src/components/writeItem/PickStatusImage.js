@@ -2,6 +2,7 @@ import { memo } from "react";
 import {
   Dimensions,
   Image,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,8 +18,10 @@ const PickStatusImage = ({
   name,
   intro,
   data,
+  currentData,
   prevBtnHandler,
   nextBtnHandler,
+  pickHandler,
 }) => {
   return (
     <View style={styles.container}>
@@ -35,16 +38,20 @@ const PickStatusImage = ({
           <ScrollView
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            style={{
-              height: 100,
-            }}
           >
             <View style={styles.statusImgContainer}>
               {data.map((el) => (
-                <View key={el.id} style={styles.statusImgBox}>
+                <Pressable
+                  key={el.id}
+                  style={[
+                    styles.statusImgBox,
+                    currentData === String(el.id) ? { elevation: 4 } : null,
+                  ]}
+                  onPress={() => pickHandler(el.category, String(el.id))}
+                >
                   <Image style={styles.statusImg} source={el.img} />
                   <Text style={styles.statusImgText}>{el.title}</Text>
-                </View>
+                </Pressable>
               ))}
             </View>
           </ScrollView>
@@ -80,8 +87,8 @@ const styles = StyleSheet.create({
   },
   statusImgContainer: {
     flexDirection: "row",
-
     alignItems: "center",
+    justifyContent: "space-between",
     width: "100%",
     height: "100%",
     flexWrap: "wrap",
@@ -90,7 +97,12 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     alignItems: "center",
     justifyContent: "center",
-    width: "33.3%",
+    width: "40%",
+    shadowColor: `${theme.colors.deepPurple}`,
+    backgroundColor: "white",
+    marginHorizontal: "5%",
+    paddingVertical: 10,
+    borderRadius: "20%",
   },
   statusImg: {
     width: 60,
