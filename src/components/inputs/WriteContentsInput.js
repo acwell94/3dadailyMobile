@@ -2,10 +2,11 @@ import { forwardRef } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import theme from "../../utils/theme";
 
-const WriteContentsInput = ({ placeholder }, ref) => {
+const WriteContentsInput = ({ placeholder, onChange, value }, ref) => {
   return (
     <View>
       <TextInput
+        onChange={onChange}
         ref={ref}
         style={styles.input}
         placeholder={placeholder}
@@ -13,8 +14,9 @@ const WriteContentsInput = ({ placeholder }, ref) => {
         cursorColor={`${theme.colors.mainPurple}`}
         maxLength={30}
         multiline={true}
+        defaultValue={value ? value : null}
       />
-      <Text>/30</Text>
+      <Text>{value.length}/30</Text>
     </View>
   );
 };

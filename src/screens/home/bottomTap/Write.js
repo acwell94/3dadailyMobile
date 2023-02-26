@@ -1,11 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import {
-  Dimensions,
-  KeyboardAvoidingView,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, ScrollView, View } from "react-native";
 import PickDate from "../../../components/writeItem/PickDate";
 import PickStatusImage from "../../../components/writeItem/PickStatusImage";
 import { Feeling, Weather, What, WithWhom } from "../../../utils/contents";
@@ -14,9 +8,17 @@ import PickAddress from "../../../components/writeItem/PickAddress";
 import PickImage from "../../../components/writeItem/PickImage";
 import PickDaily from "../../../components/writeItem/PickDaily";
 import useAuth from "../../../components/hooks/useAuth";
+
+import { BACK_API } from "react-native-dotenv";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import mime from "mime";
+import { useNavigation } from "@react-navigation/native";
+import LoadingModal from "../../../components/modal/LoadingModal";
 const { width } = Dimensions.get("window");
 const Write = () => {
   useAuth();
+  const navigation = useNavigation();
   const [writeForm, setWriteForm] = useState({
     title: "",
     firstContents: "",
@@ -34,6 +36,7 @@ const Write = () => {
     feeling: "",
     image: "",
   });
+  const [loadingModalVisible, setLoadingModalVisible] = useState(false);
 
   const writeScrollRef = useRef(null);
 
@@ -90,6 +93,88 @@ const Write = () => {
     setLocationModalVisible((prev) => !prev);
   }, [changeLocationHandler]);
 
+  // 사진 선택
+
+  const changePictureHandler = useCallback((image) => {
+    setWriteForm((prev) => ({ ...prev, image: image }));
+  }, []);
+
+  // 일기 작성
+
+  const changeDailyHandler = useCallback(
+    (e, name) => {
+      const {
+        nativeEvent: { text },
+      } = e;
+      if (text.length > 30) {
+        text = text.substring(0, 30);
+      } else {
+        setWriteForm((prev) => ({ ...prev, [name]: text }));
+      }
+    },
+    [
+      writeForm.title,
+      writeForm.firstContents,
+      writeForm.secondContents,
+      writeForm.thirdContents,
+    ]
+  );
+
+  const createContentsHandler = async () => {
+    if (!writeForm.weather) {
+      moveBtnHandler(1);
+    } else if (!writeForm.address) {
+      moveBtnHandler(2);
+    } else if (!writeForm.withWhom) {
+      moveBtnHandler(3);
+    } else if (!writeForm.what) {
+      moveBtnHandler(4);
+    } else if (!writeForm.feeling) {
+      moveBtnHandler(5);
+    } else if (!writeForm.image) {
+      moveBtnHandler(6);
+    } else if (
+      !writeForm.title ||
+      !writeForm.firstContents ||
+      !writeForm.secondContents ||
+      !writeForm.thirdContents
+    ) {
+      moveBtnHandler(7);
+    }
+    const token = await AsyncStorage.getItem("accessToken");
+    try {
+      setLoadingModalVisible((prev) => !prev);
+      const newImageUri = "file:///" + writeForm.image.split("file:/").join("");
+      const formData = new FormData();
+
+      formData.append("title", writeForm.title);
+      formData.append("firstContents", writeForm.firstContents);
+      formData.append("secondContents", writeForm.secondContents);
+      formData.append("thirdContents", writeForm.thirdContents);
+      formData.append("date", String(writeForm.date));
+      formData.append("weather", writeForm.weather);
+      formData.append("address", writeForm.address);
+      formData.append("withWhom", writeForm.withWhom);
+      formData.append("what", writeForm.what);
+      formData.append("feeling", writeForm.feeling);
+      formData.append("image", {
+        uri: newImageUri,
+        type: mime.getType(newImageUri),
+        name: newImageUri.split("/").pop(),
+      });
+      await axios.post(`${BACK_API}contents`, formData, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setLoadingModalVisible((prev) => !prev);
+      navigation.reset({ routes: [{ name: "Home" }] });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <View
       style={{
@@ -97,6 +182,7 @@ const Write = () => {
         backgroundColor: "white",
       }}
     >
+      <LoadingModal isVisible={loadingModalVisible} />
       <View style={{ flex: 1 }}>
         <ScrollView
           ref={writeScrollRef}
@@ -165,12 +251,18 @@ const Write = () => {
             intro="님, 오늘을 기념할 사진이 있나요?"
             prevBtnHandler={() => moveBtnHandler(5)}
             nextBtnHandler={() => moveBtnHandler(7)}
+            pickPictureHandler={changePictureHandler}
           />
           <PickDaily
             name="민영"
             intro="님, 오늘의 추억을 남겨주세요."
             prevBtnHandler={() => moveBtnHandler(6)}
-            nextBtnHandler={"1"}
+            nextBtnHandler={createContentsHandler}
+            writeDailyHandler={changeDailyHandler}
+            wroteTitle={writeForm.title}
+            wroteFirst={writeForm.firstContents}
+            wroteSecond={writeForm.secondContents}
+            wroteThird={writeForm.thirdContents}
           />
         </ScrollView>
       </View>

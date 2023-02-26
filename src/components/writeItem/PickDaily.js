@@ -15,9 +15,13 @@ const { height } = Dimensions.get("window");
 const PickDaily = ({
   name,
   intro,
-
   prevBtnHandler,
   nextBtnHandler,
+  writeDailyHandler,
+  wroteTitle,
+  wroteFirst,
+  wroteSecond,
+  wroteThird,
 }) => {
   return (
     <View style={styles.container}>
@@ -31,12 +35,28 @@ const PickDaily = ({
             paddingHorizontal: 24,
           }}
         >
-          <WriteTitleInput placeholder=" 20자 이내로 제목을 입력해 주세요." />
+          <WriteTitleInput
+            placeholder=" 20자 이내로 제목을 입력해 주세요."
+            onChange={(e) => writeDailyHandler(e, "title")}
+            value={wroteTitle}
+          />
           <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
             <ScrollView style={{ height: "100%" }}>
-              <WriteContentsInput placeholder=" 첫 번 째 줄을 입력해 주세요." />
-              <WriteContentsInput placeholder=" 두 번 째 줄을 입력해 주세요." />
-              <WriteContentsInput placeholder=" 세 번 째 줄을 입력해 주세요." />
+              <WriteContentsInput
+                placeholder=" 첫 번 째 줄을 입력해 주세요."
+                onChange={(e) => writeDailyHandler(e, "firstContents")}
+                value={wroteFirst}
+              />
+              <WriteContentsInput
+                placeholder=" 두 번 째 줄을 입력해 주세요."
+                onChange={(e) => writeDailyHandler(e, "secondContents")}
+                value={wroteSecond}
+              />
+              <WriteContentsInput
+                placeholder=" 세 번 째 줄을 입력해 주세요."
+                onChange={(e) => writeDailyHandler(e, "thirdContents")}
+                value={wroteThird}
+              />
             </ScrollView>
           </KeyboardAvoidingView>
         </View>

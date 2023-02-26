@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginHorizontal: "5%",
     paddingVertical: 10,
-    borderRadius: "20%",
+    borderRadius: 200,
   },
   statusImg: {
     width: 60,

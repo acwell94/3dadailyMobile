@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { StyleSheet, TextInput } from "react-native";
 import theme from "../../utils/theme";
 
-const WriteTitleInput = ({ placeholder }, ref) => {
+const WriteTitleInput = ({ placeholder, onChange, value }, ref) => {
   return (
     <TextInput
       ref={ref}
@@ -11,6 +11,8 @@ const WriteTitleInput = ({ placeholder }, ref) => {
       placeholderTextColor={`${theme.colors.inputBorder}`}
       cursorColor={`${theme.colors.mainPurple}`}
       maxLength={20}
+      onChange={onChange}
+      defaultValue={value ? value : null}
     />
   );
 };
