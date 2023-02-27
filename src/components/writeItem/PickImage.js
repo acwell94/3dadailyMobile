@@ -23,6 +23,7 @@ const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
 const PickImage = ({
   name,
+  profile,
   intro,
   prevBtnHandler,
   nextBtnHandler,
@@ -36,7 +37,12 @@ const PickImage = ({
 
   return (
     <View style={styles.container}>
-      <TopInformation name={name} intro={intro} style={{ marginBottom: 16 }} />
+      <TopInformation
+        name={name}
+        intro={intro}
+        style={{ marginBottom: 16 }}
+        image={profile}
+      />
       <WritePageBorder>
         <Pressable
           onPress={pickHandler}

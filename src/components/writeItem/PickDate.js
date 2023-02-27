@@ -14,13 +14,17 @@ const PickDate = ({
   datePickerHandler,
   showDatePicker,
   nextBtnHandler,
+  name,
+  intro,
+  profile,
 }) => {
   return (
     <View style={styles.container}>
       <TopInformation
-        name="민영"
-        intro="님, 날짜를 선택해 주세요."
+        name={name}
+        intro={intro}
         style={{ marginBottom: 16 }}
+        image={profile}
       />
       <WritePageBorder>
         <View style={styles.selectedDateBox}>

@@ -15,9 +15,13 @@ import axios from "axios";
 import mime from "mime";
 import { useNavigation } from "@react-navigation/native";
 import LoadingModal from "../../../components/modal/LoadingModal";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../components/store";
 const { width } = Dimensions.get("window");
 const Write = () => {
   useAuth();
+  const userInfo = useRecoilValue(userState);
+
   const navigation = useNavigation();
   const [writeForm, setWriteForm] = useState({
     title: "",
@@ -123,16 +127,22 @@ const Write = () => {
   const createContentsHandler = async () => {
     if (!writeForm.weather) {
       moveBtnHandler(1);
+      return;
     } else if (!writeForm.address) {
       moveBtnHandler(2);
+      return;
     } else if (!writeForm.withWhom) {
       moveBtnHandler(3);
+      return;
     } else if (!writeForm.what) {
       moveBtnHandler(4);
+      return;
     } else if (!writeForm.feeling) {
       moveBtnHandler(5);
+      return;
     } else if (!writeForm.image) {
       moveBtnHandler(6);
+      return;
     } else if (
       !writeForm.title ||
       !writeForm.firstContents ||
@@ -140,6 +150,7 @@ const Write = () => {
       !writeForm.thirdContents
     ) {
       moveBtnHandler(7);
+      return;
     }
     const token = await AsyncStorage.getItem("accessToken");
     try {
@@ -192,6 +203,9 @@ const Write = () => {
           showsVerticalScrollIndicator={false}
         >
           <PickDate
+            name={userInfo.name}
+            profile={userInfo.profileImg}
+            intro="님, 날짜를 선택해 주세요."
             date={new Date(writeForm.date)}
             handleDateChange={changeDateHandler}
             datePickerHandler={datePickerHandler}
@@ -199,7 +213,8 @@ const Write = () => {
             nextBtnHandler={() => moveBtnHandler(1)}
           />
           <PickStatusImage
-            name="민영"
+            name={userInfo.name}
+            profile={userInfo.profileImg}
             intro="님, 오늘 날씨는 어땠나요?"
             data={Weather}
             currentData={writeForm.weather}
@@ -209,7 +224,8 @@ const Write = () => {
           />
 
           <PickAddress
-            name="민영"
+            name={userInfo.name}
+            profile={userInfo.profileImg}
             intro="님, 오늘 어디에 있었나요?"
             prevBtnHandler={() => moveBtnHandler(1)}
             nextBtnHandler={() => moveBtnHandler(3)}
@@ -220,7 +236,8 @@ const Write = () => {
           />
 
           <PickStatusImage
-            name="민영"
+            name={userInfo.name}
+            profile={userInfo.profileImg}
             intro="님, 오늘 누구와 있었나요?"
             data={WithWhom}
             currentData={writeForm.withWhom}
@@ -229,7 +246,8 @@ const Write = () => {
             pickHandler={changeStatusImageHandler}
           />
           <PickStatusImage
-            name="민영"
+            name={userInfo.name}
+            profile={userInfo.profileImg}
             intro="님, 오늘 무엇을 하셨나요?"
             data={What}
             currentData={writeForm.what}
@@ -238,7 +256,8 @@ const Write = () => {
             pickHandler={changeStatusImageHandler}
           />
           <PickStatusImage
-            name="민영"
+            name={userInfo.name}
+            profile={userInfo.profileImg}
             intro="님, 오늘 기분은 어땠나요?"
             data={Feeling}
             currentData={writeForm.feeling}
@@ -247,14 +266,16 @@ const Write = () => {
             pickHandler={changeStatusImageHandler}
           />
           <PickImage
-            name="민영"
+            name={userInfo.name}
+            profile={userInfo.profileImg}
             intro="님, 오늘을 기념할 사진이 있나요?"
             prevBtnHandler={() => moveBtnHandler(5)}
             nextBtnHandler={() => moveBtnHandler(7)}
             pickPictureHandler={changePictureHandler}
           />
           <PickDaily
-            name="민영"
+            name={userInfo.name}
+            profile={userInfo.profileImg}
             intro="님, 오늘의 추억을 남겨주세요."
             prevBtnHandler={() => moveBtnHandler(6)}
             nextBtnHandler={createContentsHandler}

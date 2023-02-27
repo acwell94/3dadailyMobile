@@ -16,6 +16,7 @@ const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
 const PickStatusImage = ({
   name,
+  profile,
   intro,
   data,
   currentData,
@@ -25,7 +26,12 @@ const PickStatusImage = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TopInformation name={name} intro={intro} style={{ marginBottom: 16 }} />
+      <TopInformation
+        name={name}
+        intro={intro}
+        style={{ marginBottom: 16 }}
+        image={profile}
+      />
       <WritePageBorder>
         <View
           style={{

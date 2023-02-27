@@ -13,6 +13,7 @@ const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
 const PickAddress = ({
   name,
+  profile,
   intro,
   prevBtnHandler,
   nextBtnHandler,
@@ -28,7 +29,12 @@ const PickAddress = ({
         modalHandler={locationModalHandler}
         autoCompleteHandler={locationHandler}
       />
-      <TopInformation name={name} intro={intro} style={{ marginBottom: 16 }} />
+      <TopInformation
+        name={name}
+        intro={intro}
+        style={{ marginBottom: 16 }}
+        image={profile}
+      />
 
       <WritePageBorder>
         <View

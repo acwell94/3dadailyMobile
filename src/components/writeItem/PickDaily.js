@@ -14,6 +14,7 @@ const { width } = Dimensions.get("window");
 const { height } = Dimensions.get("window");
 const PickDaily = ({
   name,
+  profile,
   intro,
   prevBtnHandler,
   nextBtnHandler,
@@ -25,7 +26,12 @@ const PickDaily = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TopInformation name={name} intro={intro} style={{ marginBottom: 16 }} />
+      <TopInformation
+        name={name}
+        intro={intro}
+        style={{ marginBottom: 16 }}
+        image={profile}
+      />
       <WritePageBorder>
         <View
           style={{
