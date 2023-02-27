@@ -18,7 +18,7 @@ import ConfirmModal from "../../components/modal/ConfirmModal";
 import useAuth from "../../components/hooks/useAuth";
 const FriendListScreen = ({ route }) => {
   useAuth();
-  const { email, name, profileImg, userId } = route.params.userInfo;
+  const { userId } = route.params.userInfo;
   const [friendData, setFiendData] = useState();
   const [search, setSearch] = useState("");
   const [deleteFriendModalVisible, setDeleteFriendModalVisible] =
@@ -164,7 +164,11 @@ const FriendListScreen = ({ route }) => {
                   ))}
                 </>
               ) : (
-                <Text>없습니다.</Text>
+                <View style={styles.notResult}>
+                  <Text style={styles.notResultText}>
+                    아직 친구가 없습니다.
+                  </Text>
+                </View>
               )}
             </>
           )}
@@ -186,7 +190,11 @@ const FriendListScreen = ({ route }) => {
                   }
                 />
               ) : (
-                <Text>없습니다.</Text>
+                <View style={styles.notResult}>
+                  <Text style={styles.notResultText}>
+                    검색된 친구가 없습니다.
+                  </Text>
+                </View>
               )}
             </>
           )}
@@ -216,5 +224,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "spoqaR",
     color: "#6c6c6e",
+  },
+  notResult: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  notResultText: {
+    fontFamily: "spoqaB",
+    fontSize: 18,
+    color: `${theme.colors.deepPurple}`,
   },
 });

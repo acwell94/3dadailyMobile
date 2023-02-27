@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { KeyboardAvoidingView, Text, View } from "react-native";
+import { Dimensions, KeyboardAvoidingView, Text, View } from "react-native";
 import FullWidthButton from "../../components/buttons/FullWidthButton";
 import EditInputBox from "../../components/items/EditInputBox";
 import HeaderBackBtn from "../../components/items/HeaderBackBtn";
@@ -10,6 +10,8 @@ import useAuth from "../../components/hooks/useAuth";
 import useLogout from "../../components/hooks/useLogout";
 import { useNavigation } from "@react-navigation/native";
 import ConfirmModal from "../../components/modal/ConfirmModal";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+const { height } = Dimensions.get("window");
 const EditPasswordScreen = ({ route }) => {
   useAuth();
   const { logout } = useLogout();
@@ -107,62 +109,72 @@ const EditPasswordScreen = ({ route }) => {
   }, [changePassword]);
 
   return (
-    <View style={{ flex: 1, position: "relative" }}>
-      <ConfirmModal
-        isVisible={successModalVisible}
-        title={`비밀번호가 변경되었습니다.${"\n"}로그인페이지로 이동합니다.`}
-        closeModalHandler={successModalHandler}
-      />
-      <ConfirmModal
-        isVisible={failModalVisible}
-        title={failModalText}
-        closeModalHandler={failModalHandler}
-      />
-      <HeaderBackBtn title="비밀번호 재설정" />
-      <KeyboardAvoidingView behavior="padding">
-        <View style={{ paddingHorizontal: 24, marginTop: 24 }}>
-          <EditInputBox
-            title="현재 비밀번호"
-            secureTextEntry={true}
-            style={{ marginBottom: 14 }}
-            defaultData="비밀번호"
-            error={formError.password}
-            errorText="비밀번호를 입력해 주세요."
-            onChange={(e) => changePasswordFormHandler(e, "password")}
-          />
-          <EditInputBox
-            title="새로운 비밀번호"
-            secureTextEntry={true}
-            style={{ marginBottom: 14 }}
-            defaultData="비밀번호"
-            error={formError.newPassword}
-            errorText="비밀번호는 반드시 8~16자이며, 영문, 숫자, 특수문자를 포함해야 합니다."
-            onChange={(e) => changePasswordFormHandler(e, "newPassword")}
-          />
-          <EditInputBox
-            title="비밀번호 확인"
-            secureTextEntry={true}
-            style={{ marginBottom: 14 }}
-            defaultData="비밀번호 확인"
-            error={formError.newPasswordConfirm}
-            errorText="비밀번호가 일치하지 않습니다."
-            onChange={(e) => changePasswordFormHandler(e, "newPasswordConfirm")}
-          />
-        </View>
-      </KeyboardAvoidingView>
-      <FullWidthButton
-        buttonTitle="비밀번호 변경"
-        isLoading={isLoading}
-        onPress={changePassword}
-        isDisabled={
-          !(
-            passwordForm.newPassword &&
-            passwordForm.password &&
-            passwordForm.newPasswordConfirm
-          )
-        }
-      />
-    </View>
+    <KeyboardAwareScrollView>
+      <View
+        style={{
+          flex: 1,
+          height: height - 36,
+          position: "relative",
+        }}
+      >
+        <ConfirmModal
+          isVisible={successModalVisible}
+          title={`비밀번호가 변경되었습니다.${"\n"}로그인페이지로 이동합니다.`}
+          closeModalHandler={successModalHandler}
+        />
+        <ConfirmModal
+          isVisible={failModalVisible}
+          title={failModalText}
+          closeModalHandler={failModalHandler}
+        />
+        <HeaderBackBtn title="비밀번호 재설정" />
+        <KeyboardAvoidingView behavior="padding">
+          <View style={{ paddingHorizontal: 24, marginTop: 24 }}>
+            <EditInputBox
+              title="현재 비밀번호"
+              secureTextEntry={true}
+              style={{ marginBottom: 14 }}
+              defaultData="비밀번호"
+              error={formError.password}
+              errorText="비밀번호를 입력해 주세요."
+              onChange={(e) => changePasswordFormHandler(e, "password")}
+            />
+            <EditInputBox
+              title="새로운 비밀번호"
+              secureTextEntry={true}
+              style={{ marginBottom: 14 }}
+              defaultData="비밀번호"
+              error={formError.newPassword}
+              errorText="비밀번호는 반드시 8~16자이며, 영문, 숫자, 특수문자를 포함해야 합니다."
+              onChange={(e) => changePasswordFormHandler(e, "newPassword")}
+            />
+            <EditInputBox
+              title="비밀번호 확인"
+              secureTextEntry={true}
+              style={{ marginBottom: 14 }}
+              defaultData="비밀번호 확인"
+              error={formError.newPasswordConfirm}
+              errorText="비밀번호가 일치하지 않습니다."
+              onChange={(e) =>
+                changePasswordFormHandler(e, "newPasswordConfirm")
+              }
+            />
+          </View>
+        </KeyboardAvoidingView>
+        <FullWidthButton
+          buttonTitle="비밀번호 변경"
+          isLoading={isLoading}
+          onPress={changePassword}
+          isDisabled={
+            !(
+              passwordForm.newPassword &&
+              passwordForm.password &&
+              passwordForm.newPasswordConfirm
+            )
+          }
+        />
+      </View>
+    </KeyboardAwareScrollView>
   );
 };
 

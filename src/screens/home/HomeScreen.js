@@ -75,9 +75,9 @@ const HomeScreen = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          height: 72,
-          paddingTop: 10,
-          paddingBottom: 10,
+          height: 56,
+          paddingTop: 8,
+          paddingBottom: 8,
         },
         tabBarIconStyle: {
           alignItems: "center",
@@ -103,6 +103,11 @@ const HomeScreen = () => {
               }
             />
           ),
+          tabBarLabelStyle: {
+            fontWeight: "700",
+            fontSize: 12,
+            fontFamily: "spoqaB",
+          },
         }}
       />
       <BottomTab.Screen
@@ -119,6 +124,11 @@ const HomeScreen = () => {
               }
             />
           ),
+          tabBarLabelStyle: {
+            fontWeight: "700",
+            fontSize: 12,
+            fontFamily: "spoqaB",
+          },
         }}
       />
       <BottomTab.Screen
@@ -135,6 +145,11 @@ const HomeScreen = () => {
               }
             />
           ),
+          tabBarLabelStyle: {
+            fontWeight: "700",
+            fontSize: 12,
+            fontFamily: "spoqaB",
+          },
         }}
       />
     </BottomTab.Navigator>
@@ -145,8 +160,8 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   bottomIconImage: {
-    width: 22,
-    height: 22,
+    width: 18,
+    height: 18,
   },
   logoImage: {
     width: 180,

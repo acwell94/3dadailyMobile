@@ -155,9 +155,9 @@ const DetailScreen = ({ route }) => {
           </View>
           <Pressable
             style={{
-              height: 30,
-              width: 20,
-              alignItems: "flex-end",
+              height: 40,
+              width: 50,
+              alignItems: "center",
               justifyContent: "center",
             }}
             onPress={editModalHandler}
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 24,
-    paddingHorizontal: 24,
+    paddingLeft: 24,
   },
   who: {
     flexDirection: "row",
@@ -304,6 +304,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 50,
   },
+
   editBottomTabIcon: {
     width: 20,
     height: 20,
@@ -312,5 +313,8 @@ const styles = StyleSheet.create({
   editBottomTabText: {
     fontFamily: "spoqaB",
     fontSize: 16,
+    width: "100%",
+    height: "100%",
+    textAlignVertical: "center",
   },
 });
