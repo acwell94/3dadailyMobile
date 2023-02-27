@@ -17,7 +17,7 @@ const FriendProfile = ({ name, btnTitle, profileImg, onPress }) => {
           source={
             profileImg
               ? { uri: profileImg }
-              : require("@assets/testImage/testImg.png")
+              : require("@assets/icons/defaultProfile.png")
           }
         />
         <Text style={styles.name}>{name}</Text>
