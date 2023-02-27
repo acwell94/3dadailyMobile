@@ -1,28 +1,27 @@
-import { useCallback, useRef, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Dimensions, ScrollView, View } from "react-native";
-import PickDate from "../../../components/writeItem/PickDate";
-import PickStatusImage from "../../../components/writeItem/PickStatusImage";
-import { Feeling, Weather, What, WithWhom } from "../../../utils/contents";
-
-import PickAddress from "../../../components/writeItem/PickAddress";
-import PickImage from "../../../components/writeItem/PickImage";
-import PickDaily from "../../../components/writeItem/PickDaily";
-import useAuth from "../../../components/hooks/useAuth";
-
+import { useRecoilValue } from "recoil";
+import useAuth from "../../components/hooks/useAuth";
+import { userState } from "../../components/store";
+import PickAddress from "../../components/writeItem/PickAddress";
+import PickDaily from "../../components/writeItem/PickDaily";
+import PickDate from "../../components/writeItem/PickDate";
+import PickImage from "../../components/writeItem/PickImage";
+import PickStatusImage from "../../components/writeItem/PickStatusImage";
+import { Feeling, Weather, What, WithWhom } from "../../utils/contents";
 import { BACK_API } from "react-native-dotenv";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import mime from "mime";
-import { useNavigation } from "@react-navigation/native";
-import LoadingModal from "../../../components/modal/LoadingModal";
-import { useRecoilValue } from "recoil";
-import { userState } from "../../../components/store";
+import LoadingModal from "../../components/modal/LoadingModal";
 const { width } = Dimensions.get("window");
-const Write = () => {
+const EditContentsScreen = ({ route }) => {
   useAuth();
-  const userInfo = useRecoilValue(userState);
-
+  const { user, foundData } = route.params.data;
+  console.log(foundData);
   const navigation = useNavigation();
+  const userInfo = useRecoilValue(userState);
   const [writeForm, setWriteForm] = useState({
     title: "",
     firstContents: "",
@@ -41,9 +40,7 @@ const Write = () => {
     image: "",
   });
   const [loadingModalVisible, setLoadingModalVisible] = useState(false);
-
   const writeScrollRef = useRef(null);
-
   const moveBtnHandler = (times) => {
     writeScrollRef.current.scrollTo({
       x: width * times,
@@ -51,6 +48,26 @@ const Write = () => {
       animated: true,
     });
   };
+
+  useEffect(() => {
+    setWriteForm({
+      title: foundData.title,
+      firstContents: foundData.firstContents,
+      secondContents: foundData.secondContents,
+      thirdContents: foundData.thirdContents,
+      date: `${new Date(foundData.originDate)}`,
+      weather: foundData.weather,
+      address: foundData.address,
+      location: {
+        lat: foundData.location.lat,
+        lng: foundData.location.lng,
+      },
+      withWhom: foundData.withWhom,
+      what: foundData.what,
+      image: foundData?.image,
+      feeling: foundData.feeling,
+    });
+  }, []);
 
   // 날짜
 
@@ -77,8 +94,8 @@ const Write = () => {
 
   // 장소
   const [currentLocation, setCurrentLocation] = useState({
-    lat: 37.5648406,
-    lng: 126.977303,
+    lat: foundData.location.lat,
+    lng: foundData.location.lng,
   });
   const [locationModalVisible, setLocationModalVisible] = useState(false);
 
@@ -124,34 +141,9 @@ const Write = () => {
     ]
   );
 
-  const createContentsHandler = async () => {
-    if (!writeForm.weather) {
-      moveBtnHandler(1);
-      return;
-    } else if (!writeForm.address) {
-      moveBtnHandler(2);
-      return;
-    } else if (!writeForm.withWhom) {
-      moveBtnHandler(3);
-      return;
-    } else if (!writeForm.what) {
-      moveBtnHandler(4);
-      return;
-    } else if (!writeForm.feeling) {
-      moveBtnHandler(5);
-      return;
-    } else if (!writeForm.image) {
-      moveBtnHandler(6);
-      return;
-    } else if (
-      !writeForm.title ||
-      !writeForm.firstContents ||
-      !writeForm.secondContents ||
-      !writeForm.thirdContents
-    ) {
-      moveBtnHandler(7);
-      return;
-    }
+  // 글 수정
+
+  const editContentsHandler = async () => {
     const token = await AsyncStorage.getItem("accessToken");
     try {
       setLoadingModalVisible((prev) => !prev);
@@ -173,7 +165,7 @@ const Write = () => {
         type: mime.getType(newImageUri),
         name: newImageUri.split("/").pop(),
       });
-      await axios.post(`${BACK_API}contents`, formData, {
+      await axios.patch(`${BACK_API}contents/${foundData._id}`, formData, {
         headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
           "Content-Type": "multipart/form-data",
@@ -210,6 +202,7 @@ const Write = () => {
             handleDateChange={changeDateHandler}
             datePickerHandler={datePickerHandler}
             showDatePicker={showDatePicker}
+            prevBtnHandler={() => navigation.goBack()}
             nextBtnHandler={() => moveBtnHandler(1)}
           />
           <PickStatusImage
@@ -269,6 +262,7 @@ const Write = () => {
             name={userInfo.name}
             profile={userInfo.profileImg}
             intro="님, 오늘을 기념할 사진이 있나요?"
+            current={writeForm?.image}
             prevBtnHandler={() => moveBtnHandler(5)}
             nextBtnHandler={() => moveBtnHandler(7)}
             pickPictureHandler={changePictureHandler}
@@ -278,8 +272,8 @@ const Write = () => {
             profile={userInfo.profileImg}
             intro="님, 오늘의 추억을 남겨주세요."
             prevBtnHandler={() => moveBtnHandler(6)}
-            nextBtnHandler={createContentsHandler}
-            nextBtnTitle="작성"
+            nextBtnHandler={editContentsHandler}
+            nextBtnTitle="수정"
             writeDailyHandler={changeDailyHandler}
             wroteTitle={writeForm.title}
             wroteFirst={writeForm.firstContents}
@@ -292,4 +286,4 @@ const Write = () => {
   );
 };
 
-export default Write;
+export default EditContentsScreen;

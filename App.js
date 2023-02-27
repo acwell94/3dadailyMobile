@@ -17,6 +17,7 @@ import ProfileScreen from "./src/screens/setting/ProfileScreen";
 import EditProfileScreen from "./src/screens/setting/EditProfileScreen";
 import FriendListScreen from "./src/screens/setting/FriendListScreen";
 import EditPasswordScreen from "./src/screens/setting/EditPasswordScreen";
+import EditContentsScreen from "./src/screens/edit/EditContentsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -165,6 +166,29 @@ export default function App() {
                     backgroundColor: "white",
                   },
                   headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="EditContents"
+                component={EditContentsScreen}
+                options={{
+                  header: () => (
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        paddingTop: 50,
+                        paddingBottom: 20,
+                        backgroundColor: "#fff",
+                      }}
+                    >
+                      <Image
+                        style={{ width: 180, height: 50 }}
+                        source={require("@assets/logo.png")}
+                      />
+                    </View>
+                  ),
                 }}
               />
             </Stack.Navigator>

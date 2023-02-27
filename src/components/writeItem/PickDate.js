@@ -13,11 +13,13 @@ const PickDate = ({
   handleDateChange,
   datePickerHandler,
   showDatePicker,
+  prevBtnHandler,
   nextBtnHandler,
   name,
   intro,
   profile,
 }) => {
+  console.log(date);
   return (
     <View style={styles.container}>
       <TopInformation
@@ -40,6 +42,9 @@ const PickDate = ({
           />
         )}
         <View style={styles.buttonBox}>
+          {prevBtnHandler && (
+            <MoveBtn btnTitle="이전" onPress={prevBtnHandler} isLight={true} />
+          )}
           <MoveBtn btnTitle="다음" onPress={nextBtnHandler} />
         </View>
       </WritePageBorder>
@@ -68,6 +73,7 @@ const styles = StyleSheet.create({
   buttonBox: {
     width: "100%",
     height: "20%",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },

@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   statusImgContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     width: "100%",
     height: "100%",
     flexWrap: "wrap",
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     width: "40%",
     shadowColor: `${theme.colors.deepPurple}`,
     backgroundColor: "white",
-    marginHorizontal: "5%",
+    marginHorizontal: "2%",
     paddingVertical: 10,
     borderRadius: 200,
   },

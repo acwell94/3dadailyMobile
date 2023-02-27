@@ -89,6 +89,11 @@ const DetailScreen = ({ route }) => {
     }
   }, [detail]);
 
+  const editContentsHandler = useCallback(() => {
+    editBottomSheetRef.current?.close();
+    navigation.navigate("EditContents", { data: detail });
+  }, [detail]);
+
   const { year, month, date, day } = useDateForm(detail?.foundData.date || "");
   const { feelImg, weatherImg, whoImg, whatImg } = useDetailIcon(
     detail?.foundData.feeling,
@@ -118,7 +123,12 @@ const DetailScreen = ({ route }) => {
               style={styles.editBottomTabIcon}
               source={require("@assets/icons/bottomTab/bottomWriteIcon.png")}
             />
-            <Text style={styles.editBottomTabText}>수정하기</Text>
+            <Text
+              style={styles.editBottomTabText}
+              onPress={editContentsHandler}
+            >
+              수정하기
+            </Text>
           </Pressable>
           <Pressable style={styles.editBottomTabBox} onPress={onPressDelete}>
             <Image

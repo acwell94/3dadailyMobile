@@ -10,13 +10,9 @@ import {
 import MoveBtn from "../buttons/MoveBtn";
 import TopInformation from "../items/TopInformation";
 import WritePageBorder from "./WritePageBorder";
-import * as ImagePicker from "expo-image-picker";
-import * as ImageManipulator from "expo-image-manipulator";
-import { BACK_API } from "react-native-dotenv";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import mime from "mime";
+
+import { useEffect } from "react";
+
 import theme from "../../utils/theme";
 import useImageUpload from "../hooks/useImageUpload";
 const { width } = Dimensions.get("window");
@@ -25,6 +21,7 @@ const PickImage = ({
   name,
   profile,
   intro,
+  current,
   prevBtnHandler,
   nextBtnHandler,
   pickPictureHandler,
@@ -57,10 +54,20 @@ const PickImage = ({
           {image ? (
             <Image style={styles.uploadImg} source={{ uri: image }} />
           ) : (
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
               <Image
-                style={styles.defaultImg}
-                source={require("@assets/icons/imagePick.png")}
+                style={current ? styles.uploadImg : styles.defaultImg}
+                source={
+                  current
+                    ? { uri: current }
+                    : require("@assets/icons/imagePick.png")
+                }
               />
               <Text style={styles.infoMsg}>사진첩 권한을 설정해 주세요.</Text>
             </View>
