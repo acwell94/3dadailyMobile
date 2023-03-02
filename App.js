@@ -4,7 +4,14 @@ import { useCallback, useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import MainScreen from "./src/screens/main/MainScreen";
 import SignInScreen from "./src/screens/signIn/SignInScreen";
@@ -54,6 +61,7 @@ export default function App() {
   return (
     <RecoilRoot>
       <GestureHandlerRootView style={styles.container}>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
         <View style={styles.container} onLayout={onLayoutRootView}>
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Main">
