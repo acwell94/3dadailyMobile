@@ -109,5 +109,6 @@
 * 현재 심사 중에 있습니다.
 
 ## 📌 History
-#### [v1.0.0] (https://github.com/acwell94/3dadailyMobile/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94) <span>심사중</span>
+
+#### [v1.0.0](https://github.com/acwell94/3dadailyMobile/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94) <span>심사중</span>
 
