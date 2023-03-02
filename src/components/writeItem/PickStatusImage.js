@@ -51,7 +51,9 @@ const PickStatusImage = ({
                   key={el.id}
                   style={[
                     styles.statusImgBox,
-                    currentData === String(el.id) ? { elevation: 4 } : null,
+                    currentData === String(el.id)
+                      ? { shadowColor: `${theme.colors.deepPurple}` }
+                      : null,
                   ]}
                   onPress={() => pickHandler(el.category, String(el.id))}
                 >
@@ -104,7 +106,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "40%",
-    shadowColor: `${theme.colors.deepPurple}`,
+    elevation: 4,
+    shadowColor: "transparent",
     backgroundColor: "white",
     marginHorizontal: "2%",
     paddingVertical: 10,

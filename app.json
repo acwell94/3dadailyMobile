@@ -1,11 +1,12 @@
 {
   "expo": {
-    "name": "3dadaily",
+    "name": "삼다일기",
     "slug": "3dadaily",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/appIcon.png",
     "userInterfaceStyle": "light",
+    "scheme": "com.store.dailyleminyoung",
     "splash": {
       "image": "./assets/logoSplash.png",
       "resizeMode": "contain",
@@ -24,22 +25,38 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "The app accesses your photos to let you share them with your friends.",
+        "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos"
+      }
     },
     "android": {
-      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
+      "package": "com.store.dailyleminyoung",
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logoSplash.png",
+        "foregroundImage": "./assets/appIcon.png",
         "backgroundColor": "#FFFFFF"
       },
       "config": {
         "googleMaps": {
-          "apiKey": "${GOOGLE_API_KEY}"
+          "apiKey": ""
         }
       }
     },
     "web": {
       "favicon": "./assets/webFavicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "501a3c8a-3e27-4209-9dcb-a34b2f7610d9"
+      }
     }
   }
 }

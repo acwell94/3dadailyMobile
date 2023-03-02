@@ -19,7 +19,6 @@ const { width } = Dimensions.get("window");
 const EditContentsScreen = ({ route }) => {
   useAuth();
   const { user, foundData } = route.params.data;
-  console.log(foundData);
   const navigation = useNavigation();
   const userInfo = useRecoilValue(userState);
   const [writeForm, setWriteForm] = useState({
@@ -160,11 +159,16 @@ const EditContentsScreen = ({ route }) => {
       formData.append("withWhom", writeForm.withWhom);
       formData.append("what", writeForm.what);
       formData.append("feeling", writeForm.feeling);
-      formData.append("image", {
-        uri: newImageUri,
-        type: mime.getType(newImageUri),
-        name: newImageUri.split("/").pop(),
-      });
+      formData.append(
+        "image",
+        foundData.image === writeForm.image
+          ? writeForm.image
+          : {
+              uri: newImageUri,
+              type: mime.getType(newImageUri),
+              name: newImageUri.split("/").pop(),
+            }
+      );
       await axios.patch(`${BACK_API}contents/${foundData._id}`, formData, {
         headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
@@ -175,6 +179,7 @@ const EditContentsScreen = ({ route }) => {
       navigation.reset({ routes: [{ name: "Home" }] });
     } catch (err) {
       console.log(err);
+      setLoadingModalVisible((prev) => !prev);
     }
   };
 

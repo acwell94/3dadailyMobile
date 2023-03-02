@@ -13,3 +13,9 @@ web-build/
 # macOS
 .DS_Store
 .env
+eas.json
+.eas.json
+*.config.json
+app.config.json
+# official3dadaily-0da47ed0c335.json
+official3dadaily-f1f87f9a6a39.json

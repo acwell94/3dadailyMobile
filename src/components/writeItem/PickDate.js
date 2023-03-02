@@ -19,7 +19,6 @@ const PickDate = ({
   intro,
   profile,
 }) => {
-  console.log(date);
   return (
     <View style={styles.container}>
       <TopInformation
