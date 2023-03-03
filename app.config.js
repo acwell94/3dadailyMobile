@@ -6,6 +6,7 @@ dotenv.config();
 module.exports = {
   android: {
     package: "com.store.dailyleminyoung",
+    versionCode: 2,
     permissions: [
       "ACCESS_COARSE_LOCATION",
       "ACCESS_FINE_LOCATION",
