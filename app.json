@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "삼다일기",
-    "slug": "3dadaily",
+    "slug": "삼다일기",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
