@@ -4,7 +4,7 @@
     "slug": "3dadaily",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/appIcon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "com.store.dailyleminyoung",
     "splash": {
@@ -41,7 +41,7 @@
         "android.permission.WRITE_EXTERNAL_STORAGE"
       ],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/appIcon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "config": {
