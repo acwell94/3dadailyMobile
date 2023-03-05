@@ -32,7 +32,6 @@
   <img src='https://img.shields.io/badge/ReactNative-v0.70.5-blue?logo=React'/>
     <img src='https://img.shields.io/badge/Expo-v47.0.12-000020?logo=Expo'/>
   <img src="https://img.shields.io/badge/recoil-v0.7.6-blue?logo=react">
-    <img src="https://img.shields.io/badge/hookform-v2.9.10-blue?logo=react">
       <img src="https://img.shields.io/badge/axios-v2.9.10-5A29E4?logo=axios">
 </p>
 
