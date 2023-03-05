@@ -107,7 +107,7 @@
 ## 📌 배포
 
 ### Google Play Console
-* 현재 심사 중에 있습니다.
+### React-Native-Expo EAS
 
 ## 📌 History
 
