@@ -22,7 +22,8 @@
 
 🗒️ 간단하게 오늘 하루를 기록하는 삼다일기 앱 버전🗒️<br>
 <br>
-사이트 : [https://www.3dadaily.store/](https://www.3dadaily.store/)
+사이트 : [https://www.3dadaily.store/](https://www.3dadaily.store/)<br>
+앱 다운로드 : [https://play.google.com/store/apps/details?id=com.store.dailyleminyoung](https://play.google.com/store/apps/details?id=com.store.dailyleminyoung)
 
 ### [개발 배경](https://github.com/acwell94/3dadailyMobile/wiki)
 
