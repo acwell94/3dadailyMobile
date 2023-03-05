@@ -1,9 +1,10 @@
-# 삼다일기 v1.0.1
+# 삼다일기 v1.0.2
 
 ### 개발기간
 
 * #### [v1.0.0](https://github.com/acwell94/3dadailyMobile/wiki) <span>2023.02.16 ~ 2023.03.03</span>
 * #### [v1.0.1](https://github.com/acwell94/3dadailyMobile/wiki/v1.0.1) <span>2023.03.04 배포</span>
+* #### [v1.0.2](https://github.com/acwell94/3dadailyMobile/wiki/v1.0.2) <span>2023.03.05 배포</span>
 
 ##
 
@@ -113,5 +114,5 @@
 
 * #### [v1.0.0](https://github.com/acwell94/3dadailyMobile/wiki) <span>2023.03.03 배포</span>
 * #### [v1.0.1](https://github.com/acwell94/3dadailyMobile/wiki/v1.0.1) <span>2023.03.04 배포</span>
-
+* #### [v1.0.2](https://github.com/acwell94/3dadailyMobile/wiki/v1.0.2) <span>2023.03.05 배포</span>
 
