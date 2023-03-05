@@ -1,8 +1,9 @@
-# 삼다일기 v1.0.0 심사중
+# 삼다일기 v1.0.1
 
 ### 개발기간
 
-* #### [v1.0.0](https://github.com/acwell94/3dadailyMobile/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94) <span>2023.02.16 ~ 2023.02.27 심사중</span>
+* #### [v1.0.0](https://github.com/acwell94/3dadailyMobile/wiki) <span>2023.02.16 ~ 2023.03.03</span>
+* [v1.0.1](https://github.com/acwell94/3dadailyMobile/wiki/v1.0.1) <span>2023.03.04 배포</span>
 
 ##
 
@@ -22,7 +23,7 @@
 <br>
 사이트 : [https://www.3dadaily.store/](https://www.3dadaily.store/)
 
-### [개발 배경](https://github.com/acwell94/3dadailyMobile/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94)
+### [개발 배경](https://github.com/acwell94/3dadailyMobile/wiki)
 
 ## 📌 사용 기술
 <p align='start'>
@@ -110,5 +111,7 @@
 
 ## 📌 History
 
-#### [v1.0.0](https://github.com/acwell94/3dadailyMobile/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94) <span>심사중</span>
+* #### [v1.0.0](https://github.com/acwell94/3dadailyMobile/wiki) <span>2023.03.03 배포</span>
+* #### [v1.0.1](https://github.com/acwell94/3dadailyMobile/wiki/v1.0.1) <span>2023.03.04 배포</span>
+
 
