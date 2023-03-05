@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 4,
     textAlignVertical: "top",
-    color: `${theme.colors.sliverGray}`,
+    color: `${theme.colors.blackGray}`,
     fontFamily: "spoqaR",
     fontSize: 16,
   },

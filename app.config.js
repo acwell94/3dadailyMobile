@@ -4,9 +4,19 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 module.exports = {
+  name: "삼다일기",
+  slug: "3dadaily",
+  version: "1.0.2",
+  orientation: "portrait",
+  icon: "./assets/icon.png",
+  splash: {
+    image: "./assets/logoSplash.png",
+    resizeMode: "contain",
+    backgroundColor: "#ffffff",
+  },
   android: {
     package: "com.store.dailyleminyoung",
-    versionCode: 2,
+    versionCode: 4,
     permissions: [
       "ACCESS_COARSE_LOCATION",
       "ACCESS_FINE_LOCATION",

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingHorizontal: 12,
     marginBottom: 12,
-    color: `${theme.colors.sliverGray}`,
+    color: `${theme.colors.blackGray}`,
     fontFamily: "spoqaR",
     fontSize: 16,
   },

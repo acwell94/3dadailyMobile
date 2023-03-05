@@ -52,11 +52,16 @@ const EditProfileScreen = () => {
       const formData = new FormData();
 
       formData.append("name", editName ? editName : userInfo.name);
-      formData.append("profileImg", {
-        uri: newImageUri,
-        type: mime.getType(newImageUri),
-        name: newImageUri.split("/").pop(),
-      });
+      formData.append(
+        "profileImg",
+        image
+          ? {
+              uri: newImageUri,
+              type: mime.getType(newImageUri),
+              name: newImageUri.split("/").pop(),
+            }
+          : userInfo.profileImg
+      );
       await axios.patch(`${BACK_API}users/changeProfile`, formData, {
         headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
