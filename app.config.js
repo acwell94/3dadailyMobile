@@ -6,7 +6,7 @@ dotenv.config();
 module.exports = {
   name: "삼다일기",
   slug: "3dadaily",
-  version: "1.0.2",
+  version: "1.0.3",
   orientation: "portrait",
   icon: "./assets/icon.png",
   splash: {
@@ -16,7 +16,7 @@ module.exports = {
   },
   android: {
     package: "com.store.dailyleminyoung",
-    versionCode: 4,
+    versionCode: 5,
     permissions: [
       "ACCESS_COARSE_LOCATION",
       "ACCESS_FINE_LOCATION",
