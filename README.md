@@ -65,7 +65,7 @@
 ### 🛠️ 메인 페이지
 
 <p align='center'>
-  <img height="500px" src='https://user-images.githubusercontent.com/89783182/222444159-b06fbf2a-7ae5-40ca-91b1-4054789aa941.gif'/>
+  <img height="500px" src='https://user-images.githubusercontent.com/89783182/225859427-0999df40-51a6-4471-b5d4-1cee4967b508.gif'/>
 </p>
 
 * 유저가 작성한 글을 리스트 형식으로 보여주고 조건을 이용하여 검색할 수 있습니다.
@@ -79,18 +79,24 @@
 * expo-image-manipulator을 이용하여 모바일 기기에서 업로드 하는 이미지를 압축해서 AWS에 저장합니다.<br>
 * react-native-maps를 이용하여 지도를 불러오고 react-native-google-places-autocomplete를 이용하여 위치검색을 지원합니다.<br>
 
+<p align='center'>
+  <img height="500px" src='https://user-images.githubusercontent.com/89783182/225859082-0d08048f-182f-4dc4-8c10-afa1df293b66.gif'/>
+</p>
+* 필수 입력사항 수정했습니다.
+* 위치, 이미지, 일기 내용 작성하지 않아도 등록이 가능합니다.
+
 ### 🛠️ 작성한 일기 수정, 삭제
 
 #### 수정
 
 <p align='center'>
-  <img height="500px" src='https://user-images.githubusercontent.com/89783182/222447919-38dc3991-0a0f-416d-8861-221cfec90be0.gif'/>
+  <img height="500px" src='https://user-images.githubusercontent.com/89783182/225859263-e73e9992-b80c-48e3-a0a0-4aa6feb70e76.gif'/>
 </p>
 
 #### 삭제
 
 <p align='center'>
-  <img height="500px" src='https://user-images.githubusercontent.com/89783182/222448079-f744860b-2647-4207-87e8-d2f11ff0b5bb.gif'/>
+  <img height="500px" src='https://user-images.githubusercontent.com/89783182/225859348-a3bf5128-4d34-4d05-be71-95d6c0498254.gif'/>
 </p>
 
 ### 🛠️ 설정 페이지
