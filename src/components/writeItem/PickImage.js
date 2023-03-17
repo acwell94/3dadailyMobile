@@ -69,7 +69,9 @@ const PickImage = ({
                     : require("@assets/icons/imagePick.png")
                 }
               />
-              <Text style={styles.infoMsg}>사진첩 권한을 설정해 주세요.</Text>
+              {current ? null : (
+                <Text style={styles.infoMsg}>사진첩 권한을 설정해 주세요.</Text>
+              )}
             </View>
           )}
         </Pressable>

@@ -15,7 +15,14 @@ const Story = ({ data }) => {
       }}
     >
       <View style={styles.imageContainer}>
-        <Image style={styles.storyImage} source={{ uri: data.item.image }} />
+        <Image
+          style={styles.storyImage}
+          source={
+            data.item.image
+              ? { uri: data.item.image }
+              : require("@assets/noneDetailImg.png")
+          }
+        />
       </View>
       <View style={styles.dateBox}>
         <Text style={styles.month}>{month}</Text>
@@ -47,6 +54,7 @@ const styles = StyleSheet.create({
     height: "100%",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    resizeMode: "contain",
   },
   dateBox: {
     width: "100%",

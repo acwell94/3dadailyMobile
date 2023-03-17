@@ -9,7 +9,6 @@ import { useEffect } from "react";
 
 const useAuth = () => {
   const navigation = useNavigation();
-
   const checkUser = async () => {
     const accessToken = await AsyncStorage.getItem("accessToken");
     const refreshToken = await AsyncStorage.getItem("refreshToken");

@@ -22,8 +22,10 @@ import axios from "axios";
 import useDateForm from "../../components/hooks/useDateForm";
 import useDetailIcon from "../../components/hooks/useDetailIcon";
 import { useNavigation } from "@react-navigation/native";
+import useAuth from "../../components/hooks/useAuth";
 const { width } = Dimensions.get("window");
 const DetailScreen = ({ route }) => {
+  useAuth();
   const { cid } = route.params;
   const navigation = useNavigation();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
@@ -173,7 +175,11 @@ const DetailScreen = ({ route }) => {
 
         <Image
           style={styles.storyImage}
-          source={{ uri: detail?.foundData.image }}
+          source={
+            detail?.foundData.image
+              ? { uri: detail?.foundData.image }
+              : require("@assets/noneDetailImg.png")
+          }
         />
         <View style={styles.storyContentsBox}>
           <Text style={styles.storyContentsTitle}>
@@ -189,34 +195,58 @@ const DetailScreen = ({ route }) => {
             <Image style={styles.storyContentsImage} source={whatImg?.img} />
           </View>
           <View style={{ marginBottom: 16 }}>
-            <View style={styles.storyContentsTextSplit}>
-              {detail?.foundData.firstContents.split(" ").map((word, idx) => (
-                <Text style={styles.storyContentsText} key={idx}>
-                  {word}{" "}
-                </Text>
-              ))}
-            </View>
-            <View style={styles.storyContentsTextSplit}>
-              {detail?.foundData.secondContents.split(" ").map((word, idx) => (
-                <Text style={[styles.storyContentsText]} key={idx}>
-                  {word}{" "}
-                </Text>
-              ))}
-            </View>
-            <View style={styles.storyContentsTextSplit}>
-              {detail?.foundData.thirdContents.split(" ").map((word, idx) => (
-                <Text style={styles.storyContentsText} key={idx}>
-                  {word}{" "}
-                </Text>
-              ))}
-            </View>
+            {detail?.foundData.firstContents ||
+            detail?.foundData.secondContents ||
+            detail?.foundData.thirdContents ? (
+              <>
+                <View style={styles.storyContentsTextSplit}>
+                  {detail?.foundData.firstContents
+                    .split(" ")
+                    .map((word, idx) => (
+                      <Text style={styles.storyContentsText} key={idx}>
+                        {word}{" "}
+                      </Text>
+                    ))}
+                </View>
+                <View style={styles.storyContentsTextSplit}>
+                  {detail?.foundData.secondContents
+                    .split(" ")
+                    .map((word, idx) => (
+                      <Text style={[styles.storyContentsText]} key={idx}>
+                        {word}{" "}
+                      </Text>
+                    ))}
+                </View>
+                <View style={styles.storyContentsTextSplit}>
+                  {detail?.foundData.thirdContents
+                    .split(" ")
+                    .map((word, idx) => (
+                      <Text style={styles.storyContentsText} key={idx}>
+                        {word}{" "}
+                      </Text>
+                    ))}
+                </View>
+              </>
+            ) : (
+              <Text style={styles.storyContentsText}>
+                등록된 일기가 없습니다.
+              </Text>
+            )}
           </View>
           <View style={styles.storyAddressBox}>
-            <Image
-              style={styles.pinImage}
-              source={require("@assets/icons/pin.png")}
-            />
-            <Text style={styles.storyAddress}>{detail?.foundData.address}</Text>
+            {detail?.foundData.address ? (
+              <>
+                <Image
+                  style={styles.pinImage}
+                  source={require("@assets/icons/pin.png")}
+                />
+                <Text style={styles.storyAddress}>
+                  {detail?.foundData.address}
+                </Text>
+              </>
+            ) : (
+              <Text style={styles.storyAddress}>등록된 장소가 없습니다.</Text>
+            )}
           </View>
         </View>
       </ScrollView>
@@ -253,8 +283,8 @@ const styles = StyleSheet.create({
   storyImage: {
     width,
     height: 300,
-    resizeMode: "stretch",
     marginBottom: 24,
+    resizeMode: "contain",
   },
   storyContentsBox: {
     paddingHorizontal: 24,

@@ -17,6 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import LoadingModal from "../../../components/modal/LoadingModal";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../components/store";
+import ConfirmModal from "../../../components/modal/ConfirmModal";
 const { width } = Dimensions.get("window");
 const Write = () => {
   useAuth();
@@ -41,6 +42,8 @@ const Write = () => {
     image: "",
   });
   const [loadingModalVisible, setLoadingModalVisible] = useState(false);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [errorModalText, setErrorModalText] = useState("");
 
   const writeScrollRef = useRef(null);
 
@@ -127,35 +130,37 @@ const Write = () => {
   const createContentsHandler = async () => {
     if (!writeForm.weather) {
       moveBtnHandler(1);
-      return;
-    } else if (!writeForm.address) {
-      moveBtnHandler(2);
+      setErrorModalText(`오늘 날씨는 어땠나요?`);
+      setErrorModalVisible((prev) => !prev);
       return;
     } else if (!writeForm.withWhom) {
       moveBtnHandler(3);
+
+      setErrorModalText(`오늘 누구와 있었나요?`);
+      setErrorModalVisible((prev) => !prev);
       return;
     } else if (!writeForm.what) {
       moveBtnHandler(4);
+      setErrorModalText(`오늘 무엇을 하셨나요?`);
+      setErrorModalVisible((prev) => !prev);
       return;
     } else if (!writeForm.feeling) {
       moveBtnHandler(5);
+      setErrorModalText(`오늘 기분이 어땠나요?`);
+      setErrorModalVisible((prev) => !prev);
       return;
-    } else if (!writeForm.image) {
-      moveBtnHandler(6);
-      return;
-    } else if (
-      !writeForm.title ||
-      !writeForm.firstContents ||
-      !writeForm.secondContents ||
-      !writeForm.thirdContents
-    ) {
+    } else if (!writeForm.title) {
       moveBtnHandler(7);
+      setErrorModalText(`제목을 작성해 주세요.`);
+      setErrorModalVisible((prev) => !prev);
       return;
     }
     const token = await AsyncStorage.getItem("accessToken");
+    setLoadingModalVisible((prev) => !prev);
     try {
-      setLoadingModalVisible((prev) => !prev);
-      const newImageUri = "file:///" + writeForm.image.split("file:/").join("");
+      const newImageUri = writeForm.image
+        ? "file:///" + writeForm.image.split("file:/").join("")
+        : "";
       const formData = new FormData();
 
       formData.append("title", writeForm.title);
@@ -168,11 +173,16 @@ const Write = () => {
       formData.append("withWhom", writeForm.withWhom);
       formData.append("what", writeForm.what);
       formData.append("feeling", writeForm.feeling);
-      formData.append("image", {
-        uri: newImageUri,
-        type: mime.getType(newImageUri),
-        name: newImageUri.split("/").pop(),
-      });
+      formData.append(
+        "image",
+        newImageUri
+          ? {
+              uri: newImageUri,
+              type: mime.getType(newImageUri),
+              name: newImageUri.split("/").pop(),
+            }
+          : ""
+      );
       await axios.post(`${BACK_API}contents`, formData, {
         headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
@@ -193,6 +203,11 @@ const Write = () => {
         backgroundColor: "white",
       }}
     >
+      <ConfirmModal
+        isVisible={errorModalVisible}
+        title={errorModalText}
+        closeModalHandler={() => setErrorModalVisible((prev) => !prev)}
+      />
       <LoadingModal isVisible={loadingModalVisible} />
       <View style={{ flex: 1 }}>
         <ScrollView

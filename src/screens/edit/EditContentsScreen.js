@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import mime from "mime";
 import LoadingModal from "../../components/modal/LoadingModal";
+import ConfirmModal from "../../components/modal/ConfirmModal";
 const { width } = Dimensions.get("window");
 const EditContentsScreen = ({ route }) => {
   useAuth();
@@ -39,6 +40,8 @@ const EditContentsScreen = ({ route }) => {
     image: "",
   });
   const [loadingModalVisible, setLoadingModalVisible] = useState(false);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+
   const writeScrollRef = useRef(null);
   const moveBtnHandler = (times) => {
     writeScrollRef.current.scrollTo({
@@ -58,8 +61,8 @@ const EditContentsScreen = ({ route }) => {
       weather: foundData.weather,
       address: foundData.address,
       location: {
-        lat: foundData.location.lat,
-        lng: foundData.location.lng,
+        lat: foundData.location?.lat ? foundData.location.lat : 37.5666805,
+        lng: foundData.location?.lng ? foundData.location.lng : 126.9784147,
       },
       withWhom: foundData.withWhom,
       what: foundData.what,
@@ -93,8 +96,8 @@ const EditContentsScreen = ({ route }) => {
 
   // 장소
   const [currentLocation, setCurrentLocation] = useState({
-    lat: foundData.location.lat,
-    lng: foundData.location.lng,
+    lat: foundData.location?.lat ? foundData.location.lat : 37.5666805,
+    lng: foundData.location?.lng ? foundData.location.lng : 126.9784147,
   });
   const [locationModalVisible, setLocationModalVisible] = useState(false);
 
@@ -143,9 +146,13 @@ const EditContentsScreen = ({ route }) => {
   // 글 수정
 
   const editContentsHandler = async () => {
+    if (!writeForm.title) {
+      setErrorModalVisible((prev) => !prev);
+      return;
+    }
     const token = await AsyncStorage.getItem("accessToken");
+    setLoadingModalVisible((prev) => !prev);
     try {
-      setLoadingModalVisible((prev) => !prev);
       const newImageUri = "file:///" + writeForm.image.split("file:/").join("");
       const formData = new FormData();
 
@@ -190,6 +197,11 @@ const EditContentsScreen = ({ route }) => {
         backgroundColor: "white",
       }}
     >
+      <ConfirmModal
+        isVisible={errorModalVisible}
+        title="제목을 작성해 주세요."
+        closeModalHandler={() => setErrorModalVisible((prev) => !prev)}
+      />
       <LoadingModal isVisible={loadingModalVisible} />
       <View style={{ flex: 1 }}>
         <ScrollView
